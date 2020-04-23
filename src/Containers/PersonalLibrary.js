@@ -14,8 +14,11 @@ class PersonalLibrary extends React.Component{
     }
 
     displaymyWorkouts = () => {
-        return this.state.myWorkouts.map(workout => {
-            return <ContentPage key={workout.id} workout={workout}/>
+        const myList = this.state.myWorkouts.filter(list => list.user_id === this.props.currentUser)
+        
+        return myList.map(personal => {
+            return <ContentPage key={personal.id} workout={personal.workout}/>
+
         })
     }
 

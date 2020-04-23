@@ -20,7 +20,7 @@ class PublicLibrary extends React.Component{
     }
 
     render() {
-        console.log(this.state.workouts)
+        // console.log(this.state.workouts)
         return (
             <div>
                 <h3>Public Library</h3>
