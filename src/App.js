@@ -11,15 +11,20 @@ import PersonalLibrary from './Containers/PersonalLibrary'
 
 class App extends React.Component{
 
+  state ={
+    currentUser: 3
+  }
+
   render () {
+    const {currentUser} = this.state
     return (
       <Router>
         <Navbar />
         <Route exact path='/home' component={Home} />
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/login' component={Login} />
-        <Route exact path='/workouts' component={PublicLibrary} />
-        <Route exact path='/myworkouts' component={PersonalLibrary} />
+        <Route exact path='/workouts' render={() => <PublicLibrary currentUser={currentUser}/>} />
+        <Route exact path='/myworkouts' render={() => <PersonalLibrary currentUser={currentUser}/>} />
         {/* <Route exact path='/library/:id' component={WorkoutPage} /> */}
       </Router>
     )
