@@ -27,7 +27,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              New
+              Create
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link to="/workouts/new" className="dropdown-item">Workout</Link>

@@ -17,8 +17,8 @@ const ContentPage = (props) => {
                 light={true} 
             />
             {/* <p>{workout.description}</p> */}
-            <br/><Button variant="btn btn-dark">Add to Personal Libraray</Button>{' '}
-            <Link to={`/workouts/${workout.id}`}><Button variant="btn btn-dark">Go to Workout</Button></Link>
+            <br/><Button variant="btn btn-outline-dark">Add to Personal Libraray</Button>{' '}
+            <Link to={`/workouts/${workout.id}`}><Button variant="btn btn-outline-dark">Go to Workout</Button></Link>
         </div>
     )
 

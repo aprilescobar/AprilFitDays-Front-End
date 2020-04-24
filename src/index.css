@@ -24,7 +24,7 @@ h2 {
 }
 
 .standard {
-  background-color: rgba(255, 255, 255, 0.541);
+  background-color: rgba(255, 255, 255, 0.596);
   border-radius: 30px;
   margin-left: 5%;
   margin-right: 5%;
@@ -37,6 +37,7 @@ h2 {
 
 .contentCards{
   margin-bottom: 5%;
+  padding-left: 15%;
 }
 
 .center {
@@ -45,7 +46,7 @@ h2 {
 }
 
 .auth{
-  background-color: rgba(255, 255, 255, 0.541);
+  background-color: rgba(255, 255, 255, 0.582);
   border-radius: 30px;
   width: 350px;
   height: 420px;
@@ -58,7 +59,7 @@ h2 {
 }
 
 .login{
-  background-color: rgba(255, 255, 255, 0.541);
+  background-color: rgba(255, 255, 255, 0.582);
   border-radius: 30px;
   width: 350px;
   height: 320px;
