@@ -5,9 +5,79 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://wallpapertag.com/wallpaper/full/4/a/c/375098-best-leather-background-1920x1080-windows-7.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: rgb(3, 27, 46);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h2 {
+  margin-right: 5%;
+  text-align: center;
+  margin-bottom: 4%;
+}
+
+.standard {
+  background-color: rgba(255, 255, 255, 0.596);
+  border-radius: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 7%;
+  margin-bottom: 3%;
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.contentCards{
+  margin-bottom: 5%;
+  padding-left: 15%;
+}
+
+.center {
+  text-align: center;
+  padding-right: 5%;
+}
+
+.auth{
+  background-color: rgba(255, 255, 255, 0.582);
+  border-radius: 30px;
+  width: 350px;
+  height: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7%;
+  padding-left: 1%;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.login{
+  background-color: rgba(255, 255, 255, 0.582);
+  border-radius: 30px;
+  width: 350px;
+  height: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7%;
+  padding-left: 1%;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.authform{
+  margin-right: 5%;
+  padding-top: 3%;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.link{
+  color: rgb(4, 18, 37);
 }

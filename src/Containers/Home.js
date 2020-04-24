@@ -1,9 +1,14 @@
 import React from 'react'
 
 const Home = () => {
+
     return (
-        <div>
-            <h3>Home</h3>            
+        <div className="standard">
+            <h2>Home</h2>
+            <div className="center">
+            Page under construction...<br/>
+            <img src="https://media.giphy.com/media/ZaiDKidDU941VwVY4V/giphy.gif" alt="whoops"/>
+            </div>
         </div>
     )
 }

@@ -12,7 +12,7 @@ import PersonalLibrary from './Containers/PersonalLibrary'
 class App extends React.Component{
 
   state ={
-    currentUser: 3
+    currentUser: 1
   }
 
   render () {
