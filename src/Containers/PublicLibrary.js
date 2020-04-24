@@ -1,5 +1,7 @@
 import React from 'react'
 import ContentPage from '../Components/ContentPage'
+// import { Route } from 'react-router-dom';
+// import WorkoutPage from '../Containers/WorkoutPage'
 
 class PublicLibrary extends React.Component{
 
@@ -22,9 +24,11 @@ class PublicLibrary extends React.Component{
     render() {
         // console.log(this.state.workouts)
         return (
-            <div>
-                <h3>Public Library</h3>
-                {this.displayWorkouts()}
+            <div className="card-body">
+                <div className="standard">
+                <h2>Public Library</h2>
+                    {this.displayWorkouts()}
+                </div>
             </div>
         )
     }

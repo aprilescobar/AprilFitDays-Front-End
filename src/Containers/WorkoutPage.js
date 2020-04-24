@@ -1,9 +1,9 @@
 import React from 'react'
 
-const WorkoutPage = () => {
+const WorkoutPage = props => {
     return (
         <div>
-            <h3>WorkoutPage</h3>            
+            <h3>Workout Page</h3>            
         </div>
     )
 }
