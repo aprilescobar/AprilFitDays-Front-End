@@ -6,13 +6,17 @@ class PersonalLibrary extends React.Component{
     displaymyWorkouts = () => {
         const myList = this.props.myWorkouts.filter(list => list.user_id === this.props.currentUser)
         return myList.map(personal => {
-            return <ContentPage 
-                key={personal.id} 
-                personal={true} 
-                plid={personal.id} 
-                workout={personal.workout} 
-                handleRemove={this.props.handleRemove}
-            />
+            if (this.props.removedWorkout.includes(personal.id)){
+                return
+            } else {
+                return <ContentPage 
+                    key={personal.id} 
+                    personal={true} 
+                    plid={personal.id} 
+                    workout={personal.workout} 
+                    handleRemove={this.props.handleRemove}
+                />
+            }
         })
     }
 
@@ -37,7 +41,7 @@ class PersonalLibrary extends React.Component{
     }
 
     render() {
-        // console.log("inside PersonalLibrary", this.props)
+        // console.log("inside PersonalLibrary - myWorkouts", this.props.myWorkouts)
         return (
             <div className="card-body">
                 <div className="standard">

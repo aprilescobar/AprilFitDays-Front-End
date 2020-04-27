@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = props => {
   return (
     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <Link to="/home" className="navbar-brand">AprilFitDays</Link>
@@ -40,13 +40,8 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-        <Link to="/signup" className="btn btn btn-dark my-2 my-sm-0">Sign Up</Link>
-        <Link to="/login" className="btn btn btn-dark my-2 my-sm-0">Login</Link>
-
-        {/* <form className="form-inline my-2 my-lg-0">
-          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn btn-dark my-2 my-sm-0" type="submit">Search</button>
-        </form> */}
+        <em className="greeting">Hi {props.userName}! </em>{'   '}
+        <Link to="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</Link>
       </div>
     </nav>
   )

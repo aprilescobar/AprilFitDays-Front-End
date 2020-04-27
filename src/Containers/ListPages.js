@@ -10,8 +10,7 @@ class ListPages extends React.Component {
     state ={
         workouts: [],
         myWorkouts: [],
-        addWorkout: "",
-        removeWorkout: ""
+        removedWorkout: []
     }
 
     componentDidMount() {
@@ -41,10 +40,10 @@ class ListPages extends React.Component {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
             },
-            body: JSON.stringify({ user_id, workout_id})
+            body: JSON.stringify({ user_id, workout_id })
         })
         .then(res => res.json())
-        .then(addWorkout => this.setState({addWorkout}))
+        .then(addWorkout => this.setState({myWorkouts: [...this.state.myWorkouts, addWorkout]}))
     }
 
     handleRemove = e => {
@@ -52,39 +51,25 @@ class ListPages extends React.Component {
         fetch(`${personalLibraryUrl}/${id}`, {
             method: "DELETE"
         })
-    }
-
-    dislplayWorkouts = () => {
-        const workouts = [...this.state.workouts]
-        // if (this.state.addWorkout !== ""){
-        //     return [...this.state.workouts, this.state.addWorkout]
-        // }
-        return workouts
-    }
-
-    dislplayMyWorkouts = () => {
-        const myWorkouts = [...this.state.myWorkouts]
-        if (this.state.addWorkout !== ""){
-            return [...this.state.myWorkouts, this.state.addWorkout]
-        }
-        return myWorkouts
+        const updated = this.state.myWorkouts.filter(workout => workout.id !== id)
+        this.setState({myWorkouts: updated})
     }
 
     render() {
-        // console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
+        console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
                     <Library 
-                        workouts={this.dislplayWorkouts()}
-                        myWorkouts={this.dislplayMyWorkouts()} 
+                        {...this.state}
                         currentUser={this.props.currentUser} 
                         handleAdd={this.handleAdd} 
                     />} 
                 />
                 <Route exact path='/myworkouts' render={() => 
                     <PersonalLibrary 
-                        myWorkouts={this.dislplayMyWorkouts()} 
+                        myWorkouts={this.state.myWorkouts}
+                        removedWorkout={this.state.removedWorkout} 
                         currentUser={this.props.currentUser} 
                         handleRemove={this.handleRemove} 
                         />} 
