@@ -13,20 +13,44 @@ class App extends React.Component{
   }
 
   setUser = user => {
-    this.setState({currentUser: user.id}, () => this.props.history.push("/home"))
+    this.setState({
+      currentUser: user.id,
+      userName: user.name
+      }, () => this.props.history.push("/home"))
   }
 
-  render () {
-    console.log("inside App.js", this.state)
+  openApp = () => {
     return (
       <div>
-          <Navbar />
+          <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
           <ListPpages {...this.state}/>
         <Switch>
           <Route path='/home' component={Home} />
-          <Route path='/signup' render={() => <SignUp setUser={this.setUser}/>} />
-          <Route path='/login' render={() => <Login setUser={this.setUser}/>} />
         </Switch>
+      </div>
+    )
+  }
+
+  accessApp = () => {
+    return (
+    <div>
+      <Switch>
+          <Route path='/signup' render={() => <SignUp setUser={this.setUser}/>} />
+          <Route path='/' render={() => <Login setUser={this.setUser} />} />
+      </Switch>
+    </div>
+    )
+  }
+
+  handleLogout = () => {
+    this.setState({currentUser: ""}, () => this.props.history.push("/login"))
+  }
+
+  render () {
+    // console.log("inside App.js", this.state)
+    return (
+      <div>
+        {(this.state.currentUser !== "") ? this.openApp() : this.accessApp()}
       </div>
     )
   }
