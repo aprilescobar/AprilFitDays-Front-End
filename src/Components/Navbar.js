@@ -40,7 +40,11 @@ const Navbar = props => {
             </div>
           </li>
         </ul>
-        <em className="greeting">Hi {props.userName}! </em>{'   '}
+        <nav class="navbar navbar-dark bg-dark">
+          <span class="navbar-text">
+            Hi {props.userName}!
+          </span>
+        </nav>
         <Link to="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</Link>
       </div>
     </nav>

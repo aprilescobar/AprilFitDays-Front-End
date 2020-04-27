@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 class NewWorkout extends React.Component {
 
     state ={
-        username: '',
-        password: ''
+        name:'',
+        description:'',
+        media:''
     }
 
     handleChange = e => {
@@ -14,20 +14,22 @@ class NewWorkout extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log("okay, finish this feature later")
+        this.props.handleNew({...this.state})
     }
 
     render () {
         return (
-            <div className="login">
-                <h2>NewWorkout</h2>
+            <div className="newWorkout">
+                <h2>Create Workout</h2>
                 <div className="authform">
-                <form onSubmit={this.handleSubmit}>
-                    <input className="input-group input-group-sm" type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="Username" /><br />
-                    <input className="input-group input-group-sm" type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" /><br />
-                    <input className="btn btn-secondary" type="submit" value="Submit" />
-                </form><br/>
-                Are you new? ➤<Link to="/signup" className="link"> Sign Up </Link>
+                    <form onSubmit={this.handleSubmit}>
+                        <input className="input-group input-group-sm" type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="   Workout Name" /><br />
+                        <input className="input-group input-group-sm" type="text" name="media" value={this.state.media} onChange={this.handleChange} placeholder="   YouTube Url" /><br />
+                        <div class="input-group">
+                        <textarea class="form-control" aria-label="With textarea" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Workout Description"></textarea>
+                        </div>
+                        <input className="btn btn-secondary submit" type="submit" value="Submit" />
+                    </form>
                 </div>                 
             </div>
         )

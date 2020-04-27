@@ -1,6 +1,7 @@
 import React from 'react'
 import ContentPage from '../Components/ContentPage'
 
+
 class PersonalLibrary extends React.Component{
 
     displaymyWorkouts = () => {
@@ -9,13 +10,17 @@ class PersonalLibrary extends React.Component{
             if (this.props.removedWorkout.includes(personal.id)){
                 return
             } else {
-                return <ContentPage 
-                    key={personal.id} 
-                    personal={true} 
-                    plid={personal.id} 
-                    workout={personal.workout} 
-                    handleRemove={this.props.handleRemove}
-                />
+                return(
+                    <div>
+                        <ContentPage 
+                            key={personal.id} 
+                            personal={true} 
+                            plid={personal.id} 
+                            workout={personal.workout} 
+                            handleRemove={this.props.handleRemove}
+                        />
+                    </div>
+                ) 
             }
         })
     }

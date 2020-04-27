@@ -9,7 +9,7 @@ import ListPpages from './Containers/ListPages'
 class App extends React.Component{
 
   state ={
-    currentUser: 1,
+    currentUser: 1
   }
 
   setUser = user => {
@@ -23,7 +23,7 @@ class App extends React.Component{
     return (
       <div>
           <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
-          <ListPpages {...this.state}/>
+          <ListPpages history={this.props.history} {...this.state}/>
         <Switch>
           <Route path='/home' component={Home} />
         </Switch>

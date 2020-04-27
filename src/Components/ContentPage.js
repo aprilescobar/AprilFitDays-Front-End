@@ -3,35 +3,28 @@ import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 
+
 const ContentPage = props => {
     const workout = props.workout
 
     const buttons = () => {
         if(props.personal) {
             return (
-            <div>
-                <br/>
+            <div className="button">
                 <Button 
                     variant="btn btn-outline-danger"
                     value={props.plid} 
                     onClick={props.handleRemove}
-                > - Remove </Button>{' '}
-                <Link to={`/workouts/${workout.id}`}>
-                    <Button variant="btn btn-outline-success">Start Workout</Button>
-                </Link>
+                > - Remove </Button>
             </div>
         )} else {
             return (
-                <div>
-                    <br/>
+                <div className="button">
                     <Button 
                         variant="btn btn-outline-dark"
                         value={workout.id} 
                         onClick={props.handleAdd}
-                    > + My Workouts </Button>{' '}
-                    <Link to={`/workouts/${workout.id}`}>
-                        <Button variant="btn btn-outline-dark">Start Workout</Button>
-                    </Link>
+                    > + My Workouts </Button>
                 </div>
             )
         }
@@ -47,7 +40,12 @@ const ContentPage = props => {
                     controls={false} 
                     light={true} 
                 />
-                {buttons()}
+                <div className="buttons">
+                    {buttons()}
+                    <Link to={`/workouts/${workout.id}`}>
+                        <Button variant="btn btn-outline-dark">Start Workout</Button>
+                    </Link>
+                </div>
             </div>
         </div>
     )
