@@ -1,18 +1,19 @@
 import React from 'react'
 import ContentPage from '../Components/ContentPage'
 
-class PersonalLibrary extends React.Component{
+class Library extends React.Component{
 
-    displaymyWorkouts = () => {
-        const myList = this.props.myWorkouts.filter(list => list.user_id === this.props.currentUser)
-        return myList.map(personal => {
-            return <ContentPage 
-                key={personal.id} 
-                personal={true} 
-                plid={personal.id} 
-                workout={personal.workout} 
-                handleRemove={this.props.handleRemove}
-            />
+    myWorkouts = () => {
+        const currentPL = this.props.myWorkouts.filter(workout => workout.user_id === this.props.currentUser)
+        return currentPL.map(workout => workout.workout_id)
+    }
+
+    displayWorkouts = () => {
+        return this.props.workouts.map(workout => {
+            const currentPL = this.myWorkouts()
+            if(currentPL.includes(workout.id)){
+                return
+            } return <ContentPage key={workout.id} workout={workout} handleAdd={this.props.handleAdd}/>
         })
     }
 
@@ -24,12 +25,12 @@ class PersonalLibrary extends React.Component{
                 </form>
                 <div className="dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort By
+                    Duration
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <button className="dropdown-item" type="button">Duration</button>
-                    <button className="dropdown-item" type="button">Recently Added</button>
-                    <button className="dropdown-item" type="button">Frequently Used</button>
+                    <button className="dropdown-item" type="button">15 mins or less</button>
+                    <button className="dropdown-item" type="button">15 - 45 mins</button>
+                    <button className="dropdown-item" type="button">over 45 mins</button>
                 </div>
                 </div>
             </div>
@@ -37,17 +38,16 @@ class PersonalLibrary extends React.Component{
     }
 
     render() {
-        // console.log("inside PersonalLibrary", this.props)
         return (
             <div className="card-body">
                 <div className="standard">
-                    <h2>My Workouts</h2>
+                <h2>Library</h2>
                     {this.filterFeatures()}
-                    {this.displaymyWorkouts()}
+                    {this.displayWorkouts()}
                 </div>
             </div>
         )
     }
 }
 
-export default PersonalLibrary
+export default Library

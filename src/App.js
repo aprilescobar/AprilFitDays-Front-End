@@ -1,32 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Navbar from './Components/Navbar'
 import Home from './Containers/Home'
 import SignUp from './Components/SignUp'
 import Login from './Components/Login'
-import PublicLibrary from './Containers/PublicLibrary'
-import PersonalLibrary from './Containers/PersonalLibrary'
-// import WorkoutPages from './Containers/WorkoutPages'
-
+import ListPpages from './Containers/ListPages'
 
 class App extends React.Component{
 
   state ={
-    currentUser: 1
+    currentUser: 1,
+  }
+
+  setUser = user => {
+    this.setState({currentUser: user.id}, () => this.props.history.push("/home"))
   }
 
   render () {
-    const {currentUser} = this.state
+    console.log("inside App.js", this.state)
     return (
-      <Router>
-        <Navbar />
-        <Route exact path='/home' component={Home} />
-        <Route exact path='/signup' component={SignUp} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/workouts' render={() => <PublicLibrary currentUser={currentUser}/>} />
-        <Route exact path='/myworkouts' render={() => <PersonalLibrary currentUser={currentUser}/>} />
-        {/* <Route exact path='/library/:id' component={WorkoutPage} /> */}
-      </Router>
+      <div>
+          <Navbar />
+          <ListPpages {...this.state}/>
+        <Switch>
+          <Route path='/home' component={Home} />
+          <Route path='/signup' render={() => <SignUp setUser={this.setUser}/>} />
+          <Route path='/login' render={() => <Login setUser={this.setUser}/>} />
+        </Switch>
+      </div>
     )
   }
 }
