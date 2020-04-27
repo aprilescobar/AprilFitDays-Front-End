@@ -36,14 +36,14 @@ class Signup extends React.Component {
             body: JSON.stringify({ name, username, password, img_url})
         })
         .then(res => res.json())
-        .then( response => {
-            if(response.errors){
-              alert(response.errors)
+        .then( res => {
+            if(res.errors){
+              alert(res.errors)
             } else {
-              // send user somewhere
-              // storing the user object SOMEWHERE
-            //   this.props.setUser(response)
-            console.log("success")
+              // send res somewhere
+              // storing the res object SOMEWHERE
+              this.props.setUser(res.user)
+            // console.log("success", this.props, res)
             }
         })
     }
@@ -61,7 +61,7 @@ class Signup extends React.Component {
                     <input className="input-group input-group-sm" type="password" name="confirmp" value={this.state.confirmp} onChange={this.handleChange} placeholder="Confirm Password" /><br />
                     <input className="btn btn-secondary" type="submit" value="Submit" />
                 </form><br/>
-                    Already have an account? ➤<Link to="/login" className="link"> Login </Link>
+                    Been here before? ➤ <Link to="/login" className="link">Login </Link>
                 </div>
             </div>
         )
