@@ -2,6 +2,8 @@ import React from 'react'
 import { Route, Switch} from 'react-router-dom';
 import Library from './Library'
 import PersonalLibrary from './PersonalLibrary'
+import NewWorkout from '../Components/NewWorkout'
+
 
 const workoutUrl = "http://localhost:3000/workouts"
 const personalLibraryUrl = "http://localhost:3000/personal_libraries"
@@ -37,8 +39,8 @@ class ListPages extends React.Component {
         fetch(personalLibraryUrl, {
             method: "POST",
             headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify({ user_id, workout_id })
         })
@@ -53,6 +55,25 @@ class ListPages extends React.Component {
         })
         const updated = this.state.myWorkouts.filter(workout => workout.id !== id)
         this.setState({myWorkouts: updated})
+    }
+
+    handleNew = newWorkout => {
+        const {name, description, media} = newWorkout
+        fetch('http://localhost:3000/workouts', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ 
+                user_id: this.props.currentUser,
+                name,
+                description,
+                media
+            })
+        })
+        .then(res => res.json())
+        .then(workout => this.setState({ workouts: [...this.state.workouts, workout]}, () => this.props.history.push("/workouts")))
     }
 
     render() {
@@ -74,6 +95,9 @@ class ListPages extends React.Component {
                         handleRemove={this.handleRemove} 
                         />} 
                     />
+                <Route path='/workouts/new' render={() => 
+                    <NewWorkout currentUser={this.props.currentUser} handleNew={this.handleNew}/>} 
+                />
             </Switch>
         )
     }
