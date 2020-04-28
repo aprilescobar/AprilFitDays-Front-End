@@ -12,11 +12,25 @@ class App extends React.Component{
     currentUser: ""
   }
 
+  componentDidMount() {
+    if (localStorage.userId) {
+      const id = parseInt(localStorage.userId)
+      this.setState({
+        currentUser: id,
+        userName: localStorage.userName
+      })
+    }
+  }
+
   setUser = user => {
     this.setState({
       currentUser: user.id,
       userName: user.name
-      }, () => this.props.history.push("/home"))
+      }, () => {
+        localStorage.userId = user.id
+        localStorage.userName = user.name
+        this.props.history.push("/home")
+      })
   }
 
   openApp = () => {
@@ -26,6 +40,7 @@ class App extends React.Component{
           <ListPpages history={this.props.history} {...this.state}/>
         <Switch>
           <Route path='/home' component={Home} />
+          <Route path='/' component={Home} />
         </Switch>
       </div>
     )
@@ -43,7 +58,11 @@ class App extends React.Component{
   }
 
   handleLogout = () => {
-    this.setState({currentUser: ""}, () => this.props.history.push("/login"))
+    this.setState({currentUser: ""}, () => {
+      localStorage.removeItem("userId")
+      localStorage.removeItem("userName")
+      this.props.history.push("/login")
+    })
   }
 
   render () {
