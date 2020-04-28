@@ -15,7 +15,7 @@ const ContentPage = props => {
                     variant="btn btn-outline-danger"
                     value={props.plid} 
                     onClick={props.handleRemove}
-                > - Remove </Button>
+                > - Remove from List </Button>
             </div>
         )} else {
             return (
@@ -28,6 +28,21 @@ const ContentPage = props => {
                 </div>
             )
         }
+    }
+
+    const deleteButton = () => {
+        if (workout.user_id === props.currentUser){
+            return (
+                <div className="delWorkOut">
+                <Button 
+                    variant="btn btn-outline-dark"
+                    value={props.personal ? [props.plid, workout.id]: workout.id} 
+                    onClick={props.handleDelete}
+                > Delete Workout </Button>
+            </div>
+            )
+        }
+        return
     }
 
     return (
@@ -43,8 +58,9 @@ const ContentPage = props => {
                 <div className="buttons">
                     {buttons()}
                     <Link to={`/workouts/${workout.id}`}>
-                        <Button variant="btn btn-outline-dark">Start Workout</Button>
+                        <Button variant="btn btn-outline-success">Start Workout</Button>
                     </Link>
+                    {deleteButton()}
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@ class NewWorkout extends React.Component {
                         <input className="input-group input-group-sm" type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="   Workout Name" /><br />
                         <input className="input-group input-group-sm" type="text" name="media" value={this.state.media} onChange={this.handleChange} placeholder="   YouTube Url" /><br />
                         <div class="input-group">
-                        <textarea class="form-control" aria-label="With textarea" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Workout Description"></textarea>
+                        <textarea className="form-control" aria-label="With textarea" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Workout Description"></textarea>
                         </div>
                         <input className="btn btn-secondary submit" type="submit" value="Submit" />
                     </form>

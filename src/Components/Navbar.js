@@ -40,12 +40,12 @@ const Navbar = props => {
             </div>
           </li>
         </ul>
-        <nav class="navbar navbar-dark bg-dark">
-          <span class="navbar-text">
+        <nav className="navbar navbar-dark bg-dark">
+          <span className="navbar-text">
             Hi {props.userName}!
           </span>
         </nav>
-        <Link to="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</Link>
+        <a href="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</a>
       </div>
     </nav>
   )

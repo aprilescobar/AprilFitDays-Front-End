@@ -50,6 +50,10 @@ class ListPages extends React.Component {
 
     handleRemove = e => {
         const id = parseInt(e.target.value, 0)
+        this.removeFetch(id)
+    }
+
+    removeFetch = id => {
         fetch(`${personalLibraryUrl}/${id}`, {
             method: "DELETE"
         })
@@ -76,15 +80,36 @@ class ListPages extends React.Component {
         .then(workout => this.setState({ workouts: [...this.state.workouts, workout]}, () => this.props.history.push("/workouts")))
     }
 
+    handleDelete = e => {
+        const id = parseInt(e.target.value, 0)
+        this.deleteFetch(id)
+    }
+
+    deleteFetch = id => {
+        fetch(`${workoutUrl}/${id}`, {
+            method: "DELETE"
+        })
+        const updated = this.state.workouts.filter(workout => workout.id !== id)
+        this.setState({workouts: updated})
+    }
+
+    handleMyDelete = e => {
+        const plid = parseInt((e.target.value.split(',')[0]))
+        const id = parseInt((e.target.value.split(',')[1]), 0)
+        this.removeFetch(plid)
+        this.deleteFetch(id)
+    }
+
     render() {
-        console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
+        // console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
                     <Library 
                         {...this.state}
                         currentUser={this.props.currentUser} 
-                        handleAdd={this.handleAdd} 
+                        handleAdd={this.handleAdd}
+                        handleDelete={this.handleDelete} 
                     />} 
                 />
                 <Route exact path='/myworkouts' render={() => 
@@ -93,6 +118,7 @@ class ListPages extends React.Component {
                         removedWorkout={this.state.removedWorkout} 
                         currentUser={this.props.currentUser} 
                         handleRemove={this.handleRemove} 
+                        handleMyDelete={this.handleMyDelete} 
                         />} 
                     />
                 <Route path='/workouts/new' render={() => 

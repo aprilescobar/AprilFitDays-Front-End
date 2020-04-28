@@ -15,7 +15,7 @@ class Signup extends React.Component {
     }
 
     handleSubmit = e => {
-        e.preventDefault()
+        // e.preventDefault()
         const {password, confirmp} = this.state
         if ((password === confirmp)){
             this.createUser()

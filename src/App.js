@@ -9,7 +9,7 @@ import ListPpages from './Containers/ListPages'
 class App extends React.Component{
 
   state ={
-    currentUser: 1
+    currentUser: ""
   }
 
   setUser = user => {

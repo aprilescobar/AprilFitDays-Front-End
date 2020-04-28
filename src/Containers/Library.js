@@ -12,8 +12,14 @@ class Library extends React.Component{
         return this.props.workouts.map(workout => {
             const currentPL = this.myWorkouts()
             if(currentPL.includes(workout.id)){
-                return
-            } return <ContentPage key={workout.id} workout={workout} handleAdd={this.props.handleAdd}/>
+                return <div key={workout.id} ></div>
+            } return <ContentPage 
+                key={workout.id} 
+                workout={workout} 
+                currentUser={this.props.currentUser}
+                handleAdd={this.props.handleAdd} 
+                handleDelete={this.props.handleDelete}
+            />
         })
     }
 
