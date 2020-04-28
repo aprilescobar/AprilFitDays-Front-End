@@ -40,7 +40,7 @@ class App extends React.Component{
           <ListPpages history={this.props.history} {...this.state}/>
         <Switch>
           <Route path='/home' component={Home} />
-          <Route path='/' component={Home} />
+          <Route exact path='/' component={Home} />
         </Switch>
       </div>
     )
