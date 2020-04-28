@@ -62,7 +62,8 @@ class ListPages extends React.Component {
     }
 
     handleNew = newWorkout => {
-        const {name, description, media} = newWorkout
+        const {name, dur, description, media} = newWorkout
+        const duration = parseInt(dur, 0)
         fetch('http://localhost:3000/workouts', {
             method: "POST",
             headers: {
@@ -72,6 +73,7 @@ class ListPages extends React.Component {
             body: JSON.stringify({ 
                 user_id: this.props.currentUser,
                 name,
+                duration,
                 description,
                 media
             })

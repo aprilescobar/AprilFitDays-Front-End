@@ -4,7 +4,8 @@ class NewWorkout extends React.Component {
 
     state ={
         name:'',
-        description:'',
+        duration: '',
+        dur:'',
         media:''
     }
 
@@ -14,7 +15,13 @@ class NewWorkout extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        this.props.handleNew({...this.state})
+        const {name, dur, description, media} = this.state
+        const duration = parseInt(dur, 0)
+        if ((name !== '') && (description !== '') && (media !== '') && (duration > 0)){
+            this.props.handleNew({...this.state})
+        } else {
+            alert("Please complete the form")
+        }
     }
 
     render () {
@@ -23,10 +30,11 @@ class NewWorkout extends React.Component {
                 <h2>Create Workout</h2>
                 <div className="authform">
                     <form onSubmit={this.handleSubmit}>
-                        <input className="input-group input-group-sm" type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="   Workout Name" /><br />
-                        <input className="input-group input-group-sm" type="text" name="media" value={this.state.media} onChange={this.handleChange} placeholder="   YouTube Url" /><br />
+                        <input className="input-group input-group-sm" type="number" name="dur" value={this.state.dur} onChange={this.handleChange} placeholder="  Duration (in mins)" /><br />
+                        <input className="input-group input-group-sm" type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="  Name" /><br />
+                        <input className="input-group input-group-sm" type="text" name="media" value={this.state.media} onChange={this.handleChange} placeholder="  YouTube Url" /><br />
                         <div className="input-group">
-                        <textarea className="form-control" aria-label="With textarea" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Workout Description"></textarea>
+                        <textarea className="form-control" aria-label="With textarea" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Description"></textarea>
                         </div>
                         <input className="btn btn-secondary submit" type="submit" value="Submit" />
                     </form>
