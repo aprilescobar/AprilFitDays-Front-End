@@ -16,6 +16,7 @@ class Library extends React.Component{
             } return <ContentPage 
                 key={workout.id} 
                 workout={workout} 
+                
                 currentUser={this.props.currentUser}
                 handleAdd={this.props.handleAdd} 
                 handleDelete={this.props.handleDelete}

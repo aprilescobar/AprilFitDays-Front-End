@@ -46,7 +46,7 @@ class PersonalLibrary extends React.Component{
     }
 
     render() {
-        // console.log("inside PersonalLibrary - myWorkouts", this.props.myWorkouts)
+        console.log("inside PersonalLibrary - myWorkouts", this.props.myWorkouts)
         return (
             <div className="card-body">
                 <div className="standard">
