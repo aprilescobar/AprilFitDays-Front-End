@@ -76,6 +76,15 @@ class ListPages extends React.Component {
         .then(workout => this.setState({ workouts: [...this.state.workouts, workout]}, () => this.props.history.push("/workouts")))
     }
 
+    handleDelete = e => {
+        const id = parseInt(e.target.value, 0)
+        fetch(`${workoutUrl}/${id}`, {
+            method: "DELETE"
+        })
+        const updated = this.state.workouts.filter(workout => workout.id !== id)
+        this.setState({workouts: updated})
+    }
+
     render() {
         console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
         return (
@@ -84,7 +93,8 @@ class ListPages extends React.Component {
                     <Library 
                         {...this.state}
                         currentUser={this.props.currentUser} 
-                        handleAdd={this.handleAdd} 
+                        handleAdd={this.handleAdd}
+                        handleDelete={this.handleDelete} 
                     />} 
                 />
                 <Route exact path='/myworkouts' render={() => 
@@ -93,6 +103,7 @@ class ListPages extends React.Component {
                         removedWorkout={this.state.removedWorkout} 
                         currentUser={this.props.currentUser} 
                         handleRemove={this.handleRemove} 
+                        handleDelete={this.handleDelete} 
                         />} 
                     />
                 <Route path='/workouts/new' render={() => 

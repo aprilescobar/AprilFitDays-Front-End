@@ -11,15 +11,15 @@ class PersonalLibrary extends React.Component{
                 return
             } else {
                 return(
-                    <div>
-                        <ContentPage 
-                            key={personal.id} 
-                            personal={true} 
-                            plid={personal.id} 
-                            workout={personal.workout} 
-                            handleRemove={this.props.handleRemove}
-                        />
-                    </div>
+                    <ContentPage 
+                        key={personal.id}
+                        personal={true} 
+                        plid={personal.id} 
+                        workout={personal.workout} 
+                        currentUser={this.props.currentUser}
+                        handleRemove={this.props.handleRemove}
+                        handleDelete={this.props.handleDelete}
+                    />
                 ) 
             }
         })
