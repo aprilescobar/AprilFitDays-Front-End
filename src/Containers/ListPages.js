@@ -101,7 +101,7 @@ class ListPages extends React.Component {
     }
 
     render() {
-        // console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
+        // console.log("inside ListPages", this.state)
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
@@ -114,9 +114,9 @@ class ListPages extends React.Component {
                 />
                 <Route exact path='/myworkouts' render={() => 
                     <PersonalLibrary 
+                        currentUser={this.props.currentUser}
                         myWorkouts={this.state.myWorkouts}
                         removedWorkout={this.state.removedWorkout} 
-                        currentUser={this.props.currentUser} 
                         handleRemove={this.handleRemove} 
                         handleMyDelete={this.handleMyDelete} 
                         />} 

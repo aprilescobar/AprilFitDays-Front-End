@@ -6,6 +6,9 @@ import Button from 'react-bootstrap/Button'
 
 const ContentPage = props => {
     const workout = props.workout
+    console.log(props)
+
+    
 
     const buttons = () => {
         if(props.personal) {
@@ -55,6 +58,7 @@ const ContentPage = props => {
                     controls={false} 
                     light={true} 
                 />
+                <em>Created by: {workout.user.name}</em>
                 <div className="buttons">
                     {buttons()}
                     <Link to={`/workouts/${workout.id}`}>

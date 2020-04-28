@@ -20,6 +20,11 @@ class App extends React.Component{
         userName: localStorage.userName
       })
     }
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   setUser = user => {

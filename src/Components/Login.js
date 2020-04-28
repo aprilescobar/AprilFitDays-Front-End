@@ -22,11 +22,16 @@ class Login extends React.Component {
     handleSubmit = e => {
         e.preventDefault()
         const currentUser = this.state.users.find(user => user.username === this.state.username)
-        if (currentUser.password === this.state.password){
-            this.props.setUser(currentUser)
+        if (currentUser) {
+            if (currentUser.password === this.state.password){
+                this.props.setUser(currentUser)
+            } else {
+                alert("Can't find username/password combo")
+            }
         } else {
             alert("Can't find username/password combo")
         }
+
     }
 
     render () {
