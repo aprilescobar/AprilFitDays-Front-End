@@ -21,8 +21,8 @@ const Navbar = props => {
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link to="/myworkouts" className="dropdown-item">My Workouts</Link>
               <Link to="/workouts" className="dropdown-item">Library</Link>
-              <div className="dropdown-divider"></div>
-              <Link to="/athletes" className="dropdown-item">Athletes</Link>
+              {/* <div className="dropdown-divider"></div> */}
+              {/* <Link to="/athletes" className="dropdown-item">Athletes</Link> */}
             </div>
           </li>
           <li className="nav-item dropdown">

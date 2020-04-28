@@ -51,7 +51,7 @@ const ContentPage = props => {
     return (
         <div>
             <div className="contentCards">
-                <h3>{workout.name}</h3>
+                <h3>{workout.duration} min - {workout.name} </h3>
                 <ReactPlayer 
                     url={workout.media} 
                     playing={false} 
