@@ -15,7 +15,7 @@ class Signup extends React.Component {
     }
 
     handleSubmit = e => {
-        // e.preventDefault()
+        e.preventDefault()
         const {password, confirmp} = this.state
         if ((password === confirmp)){
             this.createUser()
@@ -43,7 +43,6 @@ class Signup extends React.Component {
               // send res somewhere
               // storing the res object SOMEWHERE
               this.props.setUser(res.user)
-            // console.log("success", this.props, res)
             }
         })
     }

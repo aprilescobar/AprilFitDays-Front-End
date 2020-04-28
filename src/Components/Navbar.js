@@ -45,7 +45,7 @@ const Navbar = props => {
             Hi {props.userName}!
           </span>
         </nav>
-        <a href="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</a>
+        <Link to="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</Link>
       </div>
     </nav>
   )
