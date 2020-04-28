@@ -20,7 +20,7 @@ class Login extends React.Component {
     }
 
     handleSubmit = e => {
-        e.preventDefault()
+        // e.preventDefault()
         const currentUser = this.state.users.find(user => user.username === this.state.username)
         if (currentUser.password === this.state.password){
             this.props.setUser(currentUser)

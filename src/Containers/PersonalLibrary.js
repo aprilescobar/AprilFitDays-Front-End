@@ -8,9 +8,9 @@ class PersonalLibrary extends React.Component{
         const myList = this.props.myWorkouts.filter(list => list.user_id === this.props.currentUser)
         return myList.map(personal => {
             if (this.props.removedWorkout.includes(personal.id)){
-                return
+                return <div key={personal.id} ></div>
             } else {
-                return(
+                return( 
                     <ContentPage 
                         key={personal.id}
                         personal={true} 
@@ -18,7 +18,7 @@ class PersonalLibrary extends React.Component{
                         workout={personal.workout} 
                         currentUser={this.props.currentUser}
                         handleRemove={this.props.handleRemove}
-                        handleDelete={this.props.handleDelete}
+                        handleDelete={this.props.handleMyDelete}
                     />
                 ) 
             }

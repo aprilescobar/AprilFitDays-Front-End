@@ -36,7 +36,7 @@ const ContentPage = props => {
                 <div className="delWorkOut">
                 <Button 
                     variant="btn btn-outline-dark"
-                    value={workout.id} 
+                    value={props.personal ? [props.plid, workout.id]: workout.id} 
                     onClick={props.handleDelete}
                 > Delete Workout </Button>
             </div>

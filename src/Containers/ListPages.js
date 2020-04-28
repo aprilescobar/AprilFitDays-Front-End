@@ -50,6 +50,10 @@ class ListPages extends React.Component {
 
     handleRemove = e => {
         const id = parseInt(e.target.value, 0)
+        this.removeFetch(id)
+    }
+
+    removeFetch = id => {
         fetch(`${personalLibraryUrl}/${id}`, {
             method: "DELETE"
         })
@@ -78,6 +82,10 @@ class ListPages extends React.Component {
 
     handleDelete = e => {
         const id = parseInt(e.target.value, 0)
+        this.deleteFetch(id)
+    }
+
+    deleteFetch = id => {
         fetch(`${workoutUrl}/${id}`, {
             method: "DELETE"
         })
@@ -85,8 +93,15 @@ class ListPages extends React.Component {
         this.setState({workouts: updated})
     }
 
+    handleMyDelete = e => {
+        const plid = parseInt((e.target.value.split(',')[0]))
+        const id = parseInt((e.target.value.split(',')[1]), 0)
+        this.removeFetch(plid)
+        this.deleteFetch(id)
+    }
+
     render() {
-        console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
+        // console.log("inside ListPages, myWorkouts", this.state.myWorkouts)
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
@@ -103,7 +118,7 @@ class ListPages extends React.Component {
                         removedWorkout={this.state.removedWorkout} 
                         currentUser={this.props.currentUser} 
                         handleRemove={this.handleRemove} 
-                        handleDelete={this.handleDelete} 
+                        handleMyDelete={this.handleMyDelete} 
                         />} 
                     />
                 <Route path='/workouts/new' render={() => 
