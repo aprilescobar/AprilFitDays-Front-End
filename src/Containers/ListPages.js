@@ -128,13 +128,17 @@ class ListPages extends React.Component {
     filterWorkouts = () => {
         const workouts = this.searchWorkouts()
         if (this.state.duration === 'quick'){
-            return workouts.filter(workout => workout.duration < 15)
+            const filtered = workouts.filter(workout => workout.duration < 15)
+            return filtered.sort((a,b) => a.duration - b.duration)
         } if (this.state.duration === 'short'){
-            return workouts.filter(workout => ((workout.duration >= 15) && (workout.duration <= 30)))
+            const filtered = workouts.filter(workout => ((workout.duration >= 15) && (workout.duration <= 30)))
+            return filtered.sort((a,b) => a.duration - b.duration)
         } if (this.state.duration === 'medium'){
-            return workouts.filter(workout => ((workout.duration >= 30) && (workout.duration <= 45)))
+            const filtered = workouts.filter(workout => ((workout.duration >= 30) && (workout.duration <= 45)))
+            return filtered.sort((a,b) => a.duration - b.duration)
         }if (this.state.duration === 'long'){
-            return workouts.filter(workout => workout.duration > 45)
+            const filtered = workouts.filter(workout => workout.duration > 45)
+            return filtered.sort((a,b) => a.duration - b.duration)
         }
         return workouts
     }
