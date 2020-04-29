@@ -1,5 +1,6 @@
 import React from 'react'
 import ContentPage from '../Components/ContentPage'
+import { Link } from 'react-router-dom'
 
 
 class PersonalLibrary extends React.Component{
@@ -45,14 +46,32 @@ class PersonalLibrary extends React.Component{
         )
     }
 
+    myWorkouts = () => {
+        const myList = this.props.myWorkouts.filter(list => list.user_id === this.props.currentUser)
+        if (myList.length > 0 ){
+            return (   
+                <div>
+                    {this.filterFeatures()}
+                    {this.displaymyWorkouts()}
+                </div>
+            )
+        }
+        return (
+            <div className="center"> 
+                <p>Your personal library is empty. </p>
+                Browse the <Link to="/workouts" className="link">Library</Link> and add some workouts to this page!
+            
+            </div>
+        )
+    }
+
     render() {
-        console.log("inside PersonalLibrary - myWorkouts", this.props.myWorkouts)
+        console.log(this.props)
         return (
             <div className="card-body">
                 <div className="standard">
                     <h2>My Workouts</h2>
-                    {this.filterFeatures()}
-                    {this.displaymyWorkouts()}
+                    {this.myWorkouts()}
                 </div>
             </div>
         )

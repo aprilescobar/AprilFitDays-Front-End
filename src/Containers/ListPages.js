@@ -12,7 +12,9 @@ class ListPages extends React.Component {
     state ={
         workouts: [],
         myWorkouts: [],
-        removedWorkout: []
+        removedWorkout: [],
+        searchWorkout: '',
+        filterWorkout: '',
     }
 
     componentDidMount() {
@@ -48,19 +50,6 @@ class ListPages extends React.Component {
         .then(addWorkout => this.setState({myWorkouts: [...this.state.myWorkouts, addWorkout]}))
     }
 
-    handleRemove = e => {
-        const id = parseInt(e.target.value, 0)
-        this.removeFetch(id)
-    }
-
-    removeFetch = id => {
-        fetch(`${personalLibraryUrl}/${id}`, {
-            method: "DELETE"
-        })
-        const updated = this.state.myWorkouts.filter(workout => workout.id !== id)
-        this.setState({myWorkouts: updated})
-    }
-
     handleNew = newWorkout => {
         const {name, dur, description, media} = newWorkout
         const duration = parseInt(dur, 0)
@@ -80,6 +69,19 @@ class ListPages extends React.Component {
         })
         .then(res => res.json())
         .then(workout => this.setState({ workouts: [...this.state.workouts, workout]}, () => this.props.history.push("/workouts")))
+    }
+
+    handleRemove = e => {
+        const id = parseInt(e.target.value, 0)
+        this.removeFetch(id)
+    }
+
+    removeFetch = id => {
+        fetch(`${personalLibraryUrl}/${id}`, {
+            method: "DELETE"
+        })
+        const updated = this.state.myWorkouts.filter(workout => workout.id !== id)
+        this.setState({myWorkouts: updated})
     }
 
     handleDelete = e => {
@@ -102,16 +104,55 @@ class ListPages extends React.Component {
         this.deleteFetch(id)
     }
 
+    handleSearchWorkout = e => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    handleFilter = e => {
+        this.setState({duration: e.target.value})
+        console.log("handleFilter", e.target.value)
+    }
+
+    searchWorkouts = () => {
+        const workouts = this.state.workouts
+        if (this.state.searchWorkout !== ''){
+            return workouts.filter(workout => {
+                const name = workout.name.toLowerCase()
+                const search = this.state.searchWorkout.toLowerCase()
+                return name.includes(search)
+            })
+        }             
+        return workouts
+    }
+
+    filterWorkouts = () => {
+        const workouts = this.searchWorkouts()
+        if (this.state.duration === 'quick'){
+            return workouts.filter(workout => workout.duration < 15)
+        } if (this.state.duration === 'short'){
+            return workouts.filter(workout => ((workout.duration >= 15) && (workout.duration <= 30)))
+        } if (this.state.duration === 'medium'){
+            return workouts.filter(workout => ((workout.duration >= 30) && (workout.duration <= 45)))
+        }if (this.state.duration === 'long'){
+            return workouts.filter(workout => workout.duration > 45)
+        }
+        return workouts
+    }
+
     render() {
-        // console.log("inside ListPages", this.state)
+        console.log("inside ListPages", this.state.duration)
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
                     <Library 
-                        {...this.state}
+                        workouts={this.filterWorkouts()}
+                        myWorkouts={this.state.myWorkouts}
                         currentUser={this.props.currentUser} 
                         handleAdd={this.handleAdd}
-                        handleDelete={this.handleDelete} 
+                        handleDelete={this.handleDelete}
+                        searchWorkout={this.state.searchWorkout}
+                        handleSearchWorkout={this.handleSearchWorkout} 
+                        handleFilter={this.handleFilter}
                     />} 
                 />
                 <Route exact path='/myworkouts' render={() => 

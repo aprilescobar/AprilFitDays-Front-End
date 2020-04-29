@@ -12,15 +12,15 @@ const Navbar = props => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-          <Link to="/home" className="nav-link">Home</Link>
+          <Link to="/myworkouts" className="nav-link">My Workouts</Link>
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Browse
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link to="/myworkouts" className="dropdown-item">My Workouts</Link>
               <Link to="/workouts" className="dropdown-item">Library</Link>
+              {/* <Link to="/myworkouts" className="dropdown-item">My Workouts</Link> */}
               {/* <div className="dropdown-divider"></div> */}
               {/* <Link to="/athletes" className="dropdown-item">Athletes</Link> */}
             </div>
