@@ -23,22 +23,23 @@ class Library extends React.Component{
         })
     }
 
+    handleSubmit = e => {
+        e.preventDefault()
+    }
+
     filterFeatures = () => {
         return (
             <div className="filterFeatures">
-                <form>
-                    <input className="search" type="text" name="search" placeholder="Search.."/>
+                <form onSubmit={this.handleSubmit}>
+                    <input className="search" type="text" name="searchWorkout" value={this.props.searchWorkout} onChange={this.props.handleSearchWorkout} placeholder="Search.."/>
                 </form>
-                <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Duration
-                </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <button className="dropdown-item" type="button">15 mins or less</button>
-                    <button className="dropdown-item" type="button">15 - 45 mins</button>
-                    <button className="dropdown-item" type="button">over 45 mins</button>
-                </div>
-                </div>
+                <select value={this.props.filterWorkout} onChange={this.props.handleFilter}>
+                        <option value="">Duration</option>
+                        <option value="quick">less than 15 mins</option>
+                        <option value="short">15 - 30 mins</option>
+                        <option value="medium">30 - 45 mins</option>
+                        <option value="long">over 45 mins</option>
+                </select>
             </div>
         )
     }

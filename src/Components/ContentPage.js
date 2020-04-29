@@ -6,9 +6,6 @@ import Button from 'react-bootstrap/Button'
 
 const ContentPage = props => {
     const workout = props.workout
-    console.log(props)
-
-    
 
     const buttons = () => {
         if(props.personal) {
