@@ -19,6 +19,7 @@ class Library extends React.Component{
                 currentUser={this.props.currentUser}
                 handleAdd={this.props.handleAdd} 
                 handleDelete={this.props.handleDelete}
+                handleStartWorkout={this.props.handleStartWorkout}
             />
         })
     }
@@ -50,7 +51,9 @@ class Library extends React.Component{
                 <div className="standard">
                 <h2>Library</h2>
                     {this.filterFeatures()}
-                    {this.displayWorkouts()}
+                    <div className='list'>
+                        {this.displayWorkouts()}
+                    </div>
                 </div>
             </div>
         )

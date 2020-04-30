@@ -3,9 +3,11 @@ import { Route, Switch} from 'react-router-dom';
 import Library from './Library'
 import PersonalLibrary from './PersonalLibrary'
 import NewWorkout from '../Components/NewWorkout'
+import EditWorkout from '../Components/EditWorkout'
+import WorkoutPage from './WorkoutPage'
 
 
-const workoutUrl = "http://localhost:3000/workouts"
+const workoutsUrl = "http://localhost:3000/workouts"
 const personalLibraryUrl = "http://localhost:3000/personal_libraries"
 
 class ListPages extends React.Component {
@@ -23,7 +25,7 @@ class ListPages extends React.Component {
     }
 
     getWorkouts = () => {
-        fetch(workoutUrl)
+        fetch(workoutsUrl)
         .then(res => res.json())
         .then(workouts => this.setState({workouts}))
     }
@@ -50,9 +52,22 @@ class ListPages extends React.Component {
         .then(addWorkout => this.setState({myWorkouts: [...this.state.myWorkouts, addWorkout]}))
     }
 
+    handleRemove = e => {
+        const id = parseInt(e.target.value, 0)
+        fetch(`${personalLibraryUrl}/${id}`, {
+            method: "DELETE"
+        })
+        const updated = this.state.myWorkouts.filter(workout => workout.id !== id)
+        this.setState({myWorkouts: updated})
+    }
+
     handleNew = newWorkout => {
         const {name, dur, description, media} = newWorkout
         const duration = parseInt(dur, 0)
+
+        this.setState({searchWorkout: '',
+        filterWorkout: ''})
+
         fetch('http://localhost:3000/workouts', {
             method: "POST",
             headers: {
@@ -68,40 +83,22 @@ class ListPages extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(workout => this.setState({ workouts: [...this.state.workouts, workout]}, () => this.props.history.push("/workouts")))
-    }
-
-    handleRemove = e => {
-        const id = parseInt(e.target.value, 0)
-        this.removeFetch(id)
-    }
-
-    removeFetch = id => {
-        fetch(`${personalLibraryUrl}/${id}`, {
-            method: "DELETE"
-        })
-        const updated = this.state.myWorkouts.filter(workout => workout.id !== id)
-        this.setState({myWorkouts: updated})
+        .then(workout => this.setState({ 
+                workouts: [...this.state.workouts, workout],
+            }, () => {
+            this.filterWorkouts()
+            this.props.history.push(`/workouts/${workout.id}`)
+        }))
     }
 
     handleDelete = e => {
+        console.log("inside ListPages", e.target.value)
         const id = parseInt(e.target.value, 0)
-        this.deleteFetch(id)
-    }
-
-    deleteFetch = id => {
-        fetch(`${workoutUrl}/${id}`, {
+        fetch(`${workoutsUrl}/${id}`, {
             method: "DELETE"
         })
         const updated = this.state.workouts.filter(workout => workout.id !== id)
-        this.setState({workouts: updated})
-    }
-
-    handleMyDelete = e => {
-        const plid = parseInt((e.target.value.split(',')[0]))
-        const id = parseInt((e.target.value.split(',')[1]), 0)
-        this.removeFetch(plid)
-        this.deleteFetch(id)
+        this.setState({workouts: updated}, this.props.history.push('/workouts'))
     }
 
     handleSearchWorkout = e => {
@@ -110,7 +107,6 @@ class ListPages extends React.Component {
 
     handleFilter = e => {
         this.setState({duration: e.target.value})
-        console.log("handleFilter", e.target.value)
     }
 
     searchWorkouts = () => {
@@ -136,15 +132,16 @@ class ListPages extends React.Component {
         } if (this.state.duration === 'medium'){
             const filtered = workouts.filter(workout => ((workout.duration >= 30) && (workout.duration <= 45)))
             return filtered.sort((a,b) => a.duration - b.duration)
-        }if (this.state.duration === 'long'){
+        } if (this.state.duration === 'long'){
             const filtered = workouts.filter(workout => workout.duration > 45)
             return filtered.sort((a,b) => a.duration - b.duration)
+        } else {
+            return workouts
         }
-        return workouts
     }
 
     render() {
-        console.log("inside ListPages", this.state.duration)
+        // console.log("inside ListPages", this.state.filterWorkout, this.state.searchWorkouts)
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
@@ -153,10 +150,10 @@ class ListPages extends React.Component {
                         myWorkouts={this.state.myWorkouts}
                         currentUser={this.props.currentUser} 
                         handleAdd={this.handleAdd}
-                        handleDelete={this.handleDelete}
                         searchWorkout={this.state.searchWorkout}
                         handleSearchWorkout={this.handleSearchWorkout} 
                         handleFilter={this.handleFilter}
+                        handleStartWorkout={this.handleStartWorkout}
                     />} 
                 />
                 <Route exact path='/myworkouts' render={() => 
@@ -165,11 +162,24 @@ class ListPages extends React.Component {
                         myWorkouts={this.state.myWorkouts}
                         removedWorkout={this.state.removedWorkout} 
                         handleRemove={this.handleRemove} 
-                        handleMyDelete={this.handleMyDelete} 
-                        />} 
-                    />
+                        handleStartWorkout={this.handleStartWorkout}
+                    />} 
+                />
                 <Route path='/workouts/new' render={() => 
                     <NewWorkout currentUser={this.props.currentUser} handleNew={this.handleNew}/>} 
+                />
+                <Route path='/workouts/:id/edit' render={routerProps => 
+                    <EditWorkout 
+                        {...routerProps} 
+                        currentUser={this.props.currentUser} 
+                    />} 
+                />
+                <Route path='/workouts/:id' render={routerProps => 
+                    <WorkoutPage 
+                        {...routerProps} 
+                        currentUser={this.props.currentUser} 
+                        handleDelete={this.handleDelete}
+                    />} 
                 />
             </Switch>
         )
