@@ -12,15 +12,17 @@ class PersonalLibrary extends React.Component{
                 return <div key={personal.id} ></div>
             } else {
                 return( 
-                    <ContentPage 
-                        key={personal.id}
-                        personal={true} 
-                        plid={personal.id} 
-                        workout={personal.workout} 
-                        currentUser={this.props.currentUser}
-                        handleRemove={this.props.handleRemove}
-                        handleDelete={this.props.handleMyDelete}
-                    />
+                    <div key={personal.id} >
+                        <ContentPage 
+                            personal={true} 
+                            plid={personal.id} 
+                            workout={personal.workout} 
+                            currentUser={this.props.currentUser}
+                            handleRemove={this.props.handleRemove}
+                            handleDelete={this.props.handleMyDelete}
+                            handleStartWorkout={this.props.handleStartWorkout}
+                        />
+                    </div>
                 ) 
             }
         })
@@ -51,8 +53,10 @@ class PersonalLibrary extends React.Component{
         if (myList.length > 0 ){
             return (   
                 <div>
-                    {this.filterFeatures()}
-                    {this.displaymyWorkouts()}
+                    {/* {this.filterFeatures()} */}
+                    <div className='list'>
+                        {this.displaymyWorkouts()}
+                    </div>
                 </div>
             )
         }
@@ -66,7 +70,7 @@ class PersonalLibrary extends React.Component{
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="card-body">
                 <div className="standard">

@@ -30,38 +30,25 @@ const ContentPage = props => {
         }
     }
 
-    const deleteButton = () => {
-        if (workout.user_id === props.currentUser){
-            return (
-                <div className="delWorkOut">
-                <Button 
-                    variant="btn btn-outline-dark"
-                    value={props.personal ? [props.plid, workout.id]: workout.id} 
-                    onClick={props.handleDelete}
-                > Delete Workout </Button>
-            </div>
-            )
-        }
-        return
-    }
-
     return (
         <div>
             <div className="contentCards">
-                <h3>{workout.duration} min - {workout.name} </h3>
-                <ReactPlayer 
-                    url={workout.media} 
-                    playing={false} 
-                    controls={false} 
-                    light={true} 
-                />
-                <em>Created by: {workout.user.name}</em>
-                <div className="buttons">
-                    {buttons()}
-                    <Link to={`/workouts/${workout.id}`}>
-                        <Button variant="btn btn-outline-success">Start Workout</Button>
-                    </Link>
-                    {deleteButton()}
+                    <b>{workout.name} </b>
+                    <ReactPlayer 
+                        url={workout.media} 
+                        playing={false} 
+                        controls={true} 
+                        light={true} 
+                        width='300px'
+                        height='168px'
+                    />
+                    <b>Duration: {workout.duration} min</b><br/>
+                    <em>Created by: {workout.user.name}</em>
+                    <div className="buttons"> 
+                        <Link to={`/workouts/${workout.id}`}>
+                            <Button variant="btn btn-outline-dark">Go to Workout</Button>
+                        </Link>
+                        {buttons()}
                 </div>
             </div>
         </div>
