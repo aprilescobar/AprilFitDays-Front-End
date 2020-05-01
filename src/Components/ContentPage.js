@@ -33,7 +33,7 @@ const ContentPage = props => {
     return (
         <div>
             <div className="contentCards">
-                <p>{workout.duration} min - {workout.name} </p>
+                    <b>{workout.name} </b>
                     <ReactPlayer 
                         url={workout.media} 
                         playing={false} 
@@ -42,12 +42,13 @@ const ContentPage = props => {
                         width='300px'
                         height='168px'
                     />
-                    {/* <em>Created by: {workout.user.name}</em> */}
+                    <b>Duration: {workout.duration} min</b><br/>
+                    <em>Created by: {workout.user.name}</em>
                     <div className="buttons"> 
-                         {buttons()}
                         <Link to={`/workouts/${workout.id}`}>
-                            <Button variant="btn btn-outline-success"> Go to Workout</Button>
+                            <Button variant="btn btn-outline-dark">Go to Workout</Button>
                         </Link>
+                        {buttons()}
                 </div>
             </div>
         </div>

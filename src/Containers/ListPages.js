@@ -6,7 +6,6 @@ import NewWorkout from '../Components/NewWorkout'
 import EditWorkout from '../Components/EditWorkout'
 import WorkoutPage from './WorkoutPage'
 
-
 const workoutsUrl = "http://localhost:3000/workouts"
 const personalLibraryUrl = "http://localhost:3000/personal_libraries"
 
@@ -171,13 +170,14 @@ class ListPages extends React.Component {
                 <Route path='/workouts/:id/edit' render={routerProps => 
                     <EditWorkout 
                         {...routerProps} 
-                        currentUser={this.props.currentUser} 
+                        currentUser={this.props.currentUser}
                     />} 
                 />
                 <Route path='/workouts/:id' render={routerProps => 
                     <WorkoutPage 
                         {...routerProps} 
                         currentUser={this.props.currentUser} 
+                        handleAdd={this.handleAdd}
                         handleDelete={this.handleDelete}
                     />} 
                 />

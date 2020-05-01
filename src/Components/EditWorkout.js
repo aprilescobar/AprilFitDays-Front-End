@@ -83,7 +83,7 @@ class EditWorkout extends React.Component {
                     className="form-control form-control-lg" 
                     type="text" 
                     name='nameUpdate' 
-                    value={nameUpdate} 
+                    value={nameUpdate === '' ? workout.name : nameUpdate} 
                     onChange={this.handlechange} 
                     placeholder={workout.name} 
                 />
@@ -92,7 +92,7 @@ class EditWorkout extends React.Component {
                     className="form-control" 
                     type="number" 
                     name='durUpdate' 
-                    value={durUpdate} 
+                    value={durUpdate === '' ? workout.duration : durUpdate} 
                     onChange={this.handlechange} 
                     placeholder={workout.duration} 
                 />
@@ -101,7 +101,7 @@ class EditWorkout extends React.Component {
                     className="form-control" 
                     type="text" 
                     name='desUpdate' 
-                    value={desUpdate} 
+                    value={desUpdate === '' ? workout.description : desUpdate} 
                     onChange={this.handlechange} 
                     placeholder={workout.description} 
                 />

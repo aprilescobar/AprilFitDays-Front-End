@@ -31,8 +31,8 @@ const Navbar = props => {
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link to="/workouts/new" className="dropdown-item">Workout</Link>
-              {/* <Link to="/myschedule/new" className="dropdown-item">Schedule</Link>
-              <Link to="/myplaylist/new" className="dropdown-item">Playlist</Link> */}
+              <Link to="/myschedule/new" className="dropdown-item">Schedule</Link>
+              {/* <Link to="/myplaylist/new" className="dropdown-item">Playlist</Link> */}
               {/* <Link to="/myschedule" className="dropdown-item">My Schedule</Link>
               <Link to="/myplaylist" className="dropdown-item">My Playlist</Link>
               <div className="dropdown-divider"></div>

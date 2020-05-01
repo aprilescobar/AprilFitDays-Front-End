@@ -53,7 +53,7 @@ class PersonalLibrary extends React.Component{
         if (myList.length > 0 ){
             return (   
                 <div>
-                    {this.filterFeatures()}
+                    {/* {this.filterFeatures()} */}
                     <div className='list'>
                         {this.displaymyWorkouts()}
                     </div>
