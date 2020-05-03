@@ -34,7 +34,7 @@ class App extends React.Component{
       }, () => {
         localStorage.userId = user.id
         localStorage.userName = user.name
-        this.props.history.push("/home")
+        this.props.history.push("/")
       })
   }
 
@@ -44,8 +44,7 @@ class App extends React.Component{
           <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
           <ListPpages history={this.props.history} {...this.state}/>
         <Switch>
-          <Route path='/home' component={Home} />
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' render={() => <Home {...this.state}/>} />
         </Switch>
       </div>
     )
