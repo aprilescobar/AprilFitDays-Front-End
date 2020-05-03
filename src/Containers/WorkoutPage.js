@@ -48,12 +48,63 @@ class WorkoutPage extends React.Component {
         return
     }
 
+    options = () => {
+        const { start, playing, end} = this.state
 
+        if (start) {
+            return (
+                <div>
+                    <var>Workout In Progress...</var><br/>
+                    <Button variant="outline-secondary" onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Resume'}</Button>
+                    <Button variant="outline-warning" onClick={this.handleEnd}>End Workout</Button>
+                </div>
+            )
+        }
+        return <Button variant="outline-success" onClick={this.handleStart}>Start Workout</Button>
+    }
+
+    buttons = () => {
+        if (this.state.end) {
+            return <div>Workout Ended</div>
+        }
+        return this.options()
+    }
+
+    handleStart = () => {
+        this.setState({ playing: true, start: true})
+    }
+
+    handlePlayPause = () => {
+        this.setState({ playing: !this.state.playing })
+    }
+
+    handleEnd = () => {
+        this.setState({ playing: false, end: true}, () => this.newLog())
+    }
+
+    handleDuration = (duration) => {
+        this.setState({ duration })
+    }
+
+    newLog = () => {
+        const user_id = this.props.currentUser
+        const workout_id = this.state.workout.id
+        fetch('http://localhost:3000/logs', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({user_id, workout_id})
+        })
+        .then(res => res.json())
+        .then(res => console.log("logged workout"))
+    }
     
     render() {
-        const {workout} = this.state
+        const {workout, playing, controls, muted, time, duration} = this.state
         // const user = workout.user
-        console.log("inside workoutpage", workout)
+        // console.log("inside workoutpage", workout)
         return (
             <div className="standard">
                 <h2>{workout.name}</h2>
@@ -65,18 +116,20 @@ class WorkoutPage extends React.Component {
                         onClick={this.props.handleAdd}
                     > + My Workouts </Button>
                 </div> */}
-                <Button 
-                        variant="btn btn-outline-success"
-                        // value={workout.id} 
-                        // onClick={this.props.handleDelete}
-                    > Start Workout </Button>
+                {this.buttons()}
                 <div className='player-wrapper'>
                     <ReactPlayer 
                         url={workout.media}
-                        className='react-player' 
+                        className='react-player'
+                        playing={playing}
+                        controls={controls}
+                        muted={muted}
+                        onSeek={e => console.log('onSeek', e)}
+                        onDuration={this.handleDuration} 
                         width='100%'
                         height='100%'
                     />
+                <b>Duration: <Duration seconds={duration} /></b><br/>
                 </div>
                 {/* <img src={workout.user.img_url} alt=""/> */}
                 <p>{workout.description}</p>
