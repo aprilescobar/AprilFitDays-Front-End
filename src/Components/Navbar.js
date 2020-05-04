@@ -14,24 +14,27 @@ const Navbar = props => {
           <li className="nav-item active">
           <Link to="/myworkouts" className="nav-link">My Workouts</Link>
           </li>
-          <li className="nav-item dropdown">
+          <li className="nav-item">
+          <Link to="/workouts" className="nav-link">Library</Link>
+          </li>
+          {/* <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Browse
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link to="/workouts" className="dropdown-item">Library</Link>
+              <Link to="/workouts" className="dropdown-item">Library</Link> */}
               {/* <Link to="/myworkouts" className="dropdown-item">My Workouts</Link> */}
               {/* <div className="dropdown-divider"></div> */}
               {/* <Link to="/athletes" className="dropdown-item">Athletes</Link> */}
-            </div>
-          </li>
+            {/* </div> */}
+          {/* </li> */}
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Create
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link to="/workouts/new" className="dropdown-item">Workout</Link>
-              <Link to="/myschedule/new" className="dropdown-item">Schedule</Link>
+              {/* <Link to="/myschedule/new" className="dropdown-item">Schedule</Link> */}
               {/* <Link to="/myplaylist/new" className="dropdown-item">Playlist</Link> */}
               {/* <Link to="/myschedule" className="dropdown-item">My Schedule</Link>
               <Link to="/myplaylist" className="dropdown-item">My Playlist</Link>

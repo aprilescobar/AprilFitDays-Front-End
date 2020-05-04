@@ -24,9 +24,9 @@ class EditWorkout extends React.Component {
     creatorAccess = () => {
         if (this.state.workout.user_id === this.props.currentUser){
             return (
-                <div className="delWorkOut">
+                <div className="editButton">
                     <Button 
-                        variant="btn btn-outline-dark"
+                        className="btn btn-secondary"
                         onClick={this.handleUpdate}
                     > Save Changes </Button>
                 </div>
@@ -66,46 +66,49 @@ class EditWorkout extends React.Component {
     render() {
         const {workout, nameUpdate, durUpdate, desUpdate } = this.state
         return (
-            <div className="standard">
+            <div className="createWorkout">
+                <h2>Edit Your Workout</h2>
                 <div className='player-wrapper'>
                     <ReactPlayer 
                         url={workout.media}
                         className='react-player' 
                         playing={false} 
                         controls={true} 
-                        light={false} 
+                        light={true} 
                         width='100%'
                         height='100%'
                     />
                 </div>
-                <h3>Name:</h3>
-                <input 
-                    className="form-control form-control-lg" 
-                    type="text" 
-                    name='nameUpdate' 
-                    value={nameUpdate === '' ? workout.name : nameUpdate} 
-                    onChange={this.handlechange} 
-                    placeholder={workout.name} 
-                />
-                <b>Duration: (mins)</b>
-                <input 
-                    className="form-control" 
-                    type="number" 
-                    name='durUpdate' 
-                    value={durUpdate === '' ? workout.duration : durUpdate} 
-                    onChange={this.handlechange} 
-                    placeholder={workout.duration} 
-                />
-                <b>Description:</b>
-                <input 
-                    className="form-control" 
-                    type="text" 
-                    name='desUpdate' 
-                    value={desUpdate === '' ? workout.description : desUpdate} 
-                    onChange={this.handlechange} 
-                    placeholder={workout.description} 
-                />
-                {this.creatorAccess()}
+                <div className="form">
+                    <b>Name:</b>
+                    <input 
+                        className="input-group input-group-sm"  
+                        type="text" 
+                        name='nameUpdate' 
+                        value={nameUpdate === '' ? workout.name : nameUpdate} 
+                        onChange={this.handlechange} 
+                        placeholder={workout.name} 
+                    />
+                    <b>Duration: (mins)</b>
+                    <input 
+                        className="input-group input-group-sm"  
+                        type="number" 
+                        name='durUpdate' 
+                        value={durUpdate === '' ? workout.duration : durUpdate} 
+                        onChange={this.handlechange} 
+                        placeholder={workout.duration} 
+                    />
+                    <b>Description:</b>
+                    <input 
+                        className="input-group input-group-sm"  
+                        type="text" 
+                        name='desUpdate' 
+                        value={desUpdate === '' ? workout.description : desUpdate} 
+                        onChange={this.handlechange} 
+                        placeholder={workout.description} 
+                    />
+                    {this.creatorAccess()}
+                </div>
             </div>
         )
     }

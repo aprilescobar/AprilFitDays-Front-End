@@ -47,10 +47,14 @@ class Library extends React.Component{
 
     render() {
         return (
-            <div className="card-body">
-                <div className="standard">
-                <h2>Library</h2>
+            <div>
+                <div className="header">
+                    <h2>Library</h2>
+                </div>
+                <div className="filters">
                     {this.filterFeatures()}
+                </div>
+                <div className="standard">
                     <div className='list'>
                         {this.displayWorkouts()}
                     </div>
