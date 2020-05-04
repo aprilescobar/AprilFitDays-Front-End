@@ -141,15 +141,16 @@ class ListPages extends React.Component {
 
     render() {
         // console.log("inside ListPages", this.state.filterWorkout, this.state.searchWorkouts)
+        const { myWorkouts, removedWorkout, searchWorkout} = this.state
         return (
             <Switch>
                 <Route exact path='/workouts' render={() => 
                     <Library 
                         workouts={this.filterWorkouts()}
-                        myWorkouts={this.state.myWorkouts}
+                        myWorkouts={myWorkouts}
                         currentUser={this.props.currentUser} 
                         handleAdd={this.handleAdd}
-                        searchWorkout={this.state.searchWorkout}
+                        searchWorkout={searchWorkout}
                         handleSearchWorkout={this.handleSearchWorkout} 
                         handleFilter={this.handleFilter}
                         handleStartWorkout={this.handleStartWorkout}
@@ -158,8 +159,8 @@ class ListPages extends React.Component {
                 <Route exact path='/myworkouts' render={() => 
                     <PersonalLibrary 
                         currentUser={this.props.currentUser}
-                        myWorkouts={this.state.myWorkouts}
-                        removedWorkout={this.state.removedWorkout} 
+                        myWorkouts={myWorkouts}
+                        removedWorkout={removedWorkout} 
                         handleRemove={this.handleRemove} 
                         handleStartWorkout={this.handleStartWorkout}
                     />} 
@@ -176,9 +177,12 @@ class ListPages extends React.Component {
                 <Route path='/workouts/:id' render={routerProps => 
                     <WorkoutPage 
                         {...routerProps} 
-                        currentUser={this.props.currentUser} 
+                        currentUser={this.props.currentUser}
+                        myWorkouts={myWorkouts}
                         handleAdd={this.handleAdd}
                         handleDelete={this.handleDelete}
+                        handleRemove={this.handleRemove} 
+
                     />} 
                 />
             </Switch>

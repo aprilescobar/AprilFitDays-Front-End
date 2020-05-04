@@ -15,7 +15,7 @@ const ContentPage = props => {
                     variant="btn btn-outline-danger"
                     value={props.plid} 
                     onClick={props.handleRemove}
-                > - Remove from List </Button>
+                > - My Workouts </Button>
             </div>
         )} else {
             return (
@@ -33,22 +33,24 @@ const ContentPage = props => {
     return (
         <div>
             <div className="contentCards">
-                    <b>{workout.name} </b>
-                    <ReactPlayer 
-                        url={workout.media} 
-                        playing={false} 
-                        controls={true} 
-                        light={true} 
-                        width='300px'
-                        height='168px'
-                    />
-                    <b>Duration: {workout.duration} min</b><br/>
-                    <em>Created by: {workout.user.name}</em>
-                    <div className="buttons"> 
+                <b>{workout.name} </b>
+                <ReactPlayer 
+                    url={workout.media} 
+                    playing={false} 
+                    controls={true} 
+                    light={true} 
+                    width='300px'
+                    height='168px'
+                />
+                <b>Duration: {workout.duration} min</b><br/>
+                <em>Created by: {workout.user.name}</em>
+                <div className="buttons"> 
+                    <div className="button">
                         <Link to={`/workouts/${workout.id}`}>
                             <Button variant="btn btn-outline-dark">Go to Workout</Button>
                         </Link>
-                        {buttons()}
+                    </div>
+                    {buttons()}
                 </div>
             </div>
         </div>

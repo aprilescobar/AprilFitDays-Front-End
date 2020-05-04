@@ -72,9 +72,11 @@ class PersonalLibrary extends React.Component{
     render() {
         // console.log(this.props)
         return (
-            <div className="card-body">
-                <div className="standard">
+            <div>
+                <div className="header">
                     <h2>My Workouts</h2>
+                </div>
+                <div className="standard">
                     {this.myWorkouts()}
                 </div>
             </div>
