@@ -86,7 +86,7 @@ class NewWorkout extends React.Component {
                                     placeholder="Tell us about the workout!"
                                 />
                             </div>
-                            <div className="newButton">
+                            <div className="center">
                                 <input className="btn btn-secondary submit" type="submit" value="Submit" />
                             </div>
                         </form>

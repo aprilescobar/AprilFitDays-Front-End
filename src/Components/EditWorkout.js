@@ -99,7 +99,7 @@ class EditWorkout extends React.Component {
                         placeholder={workout.duration} 
                     />
                     <b>Description:</b>
-                    <input 
+                    <textarea 
                         className="input-group input-group-sm"  
                         type="text" 
                         name='desUpdate' 

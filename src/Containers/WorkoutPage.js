@@ -110,7 +110,7 @@ class WorkoutPage extends React.Component {
 
     buttons = () => {
         if (this.state.end) {
-            return <div>Amazing Job! Your workout has been logged!</div>
+            return <div>Workout Ended</div>
         }
         return this.startWorkout()
     }
@@ -135,7 +135,7 @@ class WorkoutPage extends React.Component {
             body: JSON.stringify({user_id, workout_id})
         })
         .then(res => res.json())
-        this.props.history.push('/')
+        .then(res => this.props.history.push('/'))
     }
     
     render() {
@@ -166,7 +166,7 @@ class WorkoutPage extends React.Component {
                         <div className="col-sm-4">
                                 <div className="startWorkout">
                                     {this.buttons()}
-                            </div>
+                                </div>
                                 <div className="descriptionBox">
                                     <div className="center">
                                         <img src={user.img_url} alt="Profile Pic" className="thumbnail"/>
@@ -176,13 +176,13 @@ class WorkoutPage extends React.Component {
                                         <b>Description:</b><br/> 
                                         {workout.description}
                                     </div>
-
-                            </div>
-
+                                </div>
+                                <div className="comments">
+                                   <b>Comments:</b>
+                                </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
         )
     }
