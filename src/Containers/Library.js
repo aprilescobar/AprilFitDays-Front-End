@@ -29,7 +29,6 @@ class Library extends React.Component{
                 handleStartWorkout={props.handleStartWorkout}
             />
         })
-
         return list.slice(startIndex, startIndex + 6)
     }
 
@@ -64,8 +63,9 @@ class Library extends React.Component{
     pageButtons = () => {
         const maxLength = this.props.workouts.length
         const myWorkouts = this.myWorkouts().length
-        const max = (maxLength) - myWorkouts
-        console.log(max)
+        const max = (maxLength - myWorkouts)
+        const pageNums = this.pageNums()
+        const page = (this.state.startIndex/6)
         return( 
             <div className="page">
                 {this.state.startIndex > 0 &&
@@ -76,6 +76,8 @@ class Library extends React.Component{
                             onClick={this.handlePageButton}
                         >◀◀︎ Prev </Button >
                     </div>
+                }
+                {pageNums.slice(page, page + 3)   
                 }
                 { this.state.startIndex < (max - 6) &&                 
                     <div className="button">
@@ -90,8 +92,36 @@ class Library extends React.Component{
         )
     }
 
+    setStartIndex = (newIndex) => {
+        const maxLength = this.props.workouts.length
+        const myWorkouts = this.myWorkouts().length
+        const max = (maxLength - myWorkouts)
+
+        if( newIndex >= 0 && newIndex < max){
+            this.setState({ startIndex: newIndex })
+        }
+    }
+
+    pageNums = () => {
+        const maxLength = this.props.workouts.length
+        const myWorkouts = this.myWorkouts().length
+        const max = (maxLength - myWorkouts)
+
+        const lastPage = Math.ceil(max / 6)
+        let pagesArray = []
+        for(let i = 0; i < lastPage; i++){
+            pagesArray.push(<Button 
+                variant="btn btn-outline-dark"
+                className="button"
+                onClick={() => this.setStartIndex(i * 6)} 
+                key={i}>{i + 1}</Button>)
+        }
+        return pagesArray
+    }
+
     render() {
-        console.log("index", this.state.startIndex)
+        const page = (this.state.startIndex/6) + 1
+        console.log("index", page)
         return (
             <div>
                 <div className="splitTop">
