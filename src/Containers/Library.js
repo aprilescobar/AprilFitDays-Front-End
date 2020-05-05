@@ -62,27 +62,36 @@ class Library extends React.Component{
     }
 
     pageButtons = () => {
+        const maxLength = this.props.workouts.length
+        const myWorkouts = this.myWorkouts().length
+        const max = (maxLength) - myWorkouts
+        console.log(max)
         return( 
             <div className="page">
-                <div className="button">
-                    <Button 
-                        variant="btn btn-outline-dark"
-                        value={-6}
-                        onClick={this.handlePageButton}
-                    >◀◀︎ Prev </Button >
-                </div>
-                <div className="button">
-                    <Button 
-                        variant="btn btn-outline-dark"
-                        value={6}
-                        onClick={this.handlePageButton}
-                    >Next ▷▷</Button >
-                </div>
+                {this.state.startIndex > 0 &&
+                    <div className="button">
+                        <Button 
+                            variant="btn btn-outline-dark"
+                            value={-6}
+                            onClick={this.handlePageButton}
+                        >◀◀︎ Prev </Button >
+                    </div>
+                }
+                { this.state.startIndex < (max - 6) &&                 
+                    <div className="button">
+                        <Button 
+                            variant="btn btn-outline-dark"
+                            value={6}
+                            onClick={this.handlePageButton}
+                        >Next ▷▷</Button >
+                    </div>
+                }
             </div>
         )
     }
 
     render() {
+        console.log("index", this.state.startIndex)
         return (
             <div>
                 <div className="splitTop">
