@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 
 class PersonalLibrary extends React.Component{
 
+    state = {
+        startIndex: 0
+    }
+
     displaymyWorkouts = () => {
         const myList = this.props.myWorkouts.filter(list => list.user_id === this.props.currentUser)
         return myList.map(personal => {
