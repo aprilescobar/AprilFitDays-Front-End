@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
 
+const commentsUrl = 'http://localhost:3000/comments'
 
 class WorkoutPage extends React.Component {
 
@@ -14,9 +15,11 @@ class WorkoutPage extends React.Component {
         start: false,
         end: false,
         user: {},
+        comments:[],
         showDes: false,
-        showCmts: false,
-        comments:[]
+        showCmts: true,
+        addCmt: false,
+        comment: ""
     }
 
     componentDidMount() {
@@ -32,7 +35,7 @@ class WorkoutPage extends React.Component {
     }
 
     getComments = () =>{
-        fetch('http://localhost:3000/comments')
+        fetch(commentsUrl)
         .then(res => res.json())
         .then(comments => this.setState({comments}))
     }
@@ -137,7 +140,6 @@ class WorkoutPage extends React.Component {
         return myList.find(workout => workout.workout_id === this.state.workout.id)
     }
 
-
     startWorkout = () => {
         if (this.state.start) {
             return (
@@ -208,17 +210,77 @@ class WorkoutPage extends React.Component {
     }
 
     renderCmts = () => {
+        const {addCmt} = this.state
         return(
             <div>
                 <div className="comments">
-                    <b>Comments:</b>
-                    {this.displayComments()}
+                    <div className="center">
+                        <b>Comments:</b>
+                    </div>
+                    <div>
+                        {this.displayComments()}
+                    </div>
+                    {addCmt ? this.addCmt() : 
+                        <div className="buttons">
+                            <Button 
+                                variant="btn btn-outline-dark"
+                                onClick={() => this.setState({addCmt: true})}
+                            > Add Comment </Button>
+                        </div>
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    handleAddCmt = e => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    handlePostCmt = () => {
+        const user_id = this.props.currentUser
+        const workout_id = this.state.workout.id
+        const text = this.state.comment
+        fetch(commentsUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ workout_id, user_id, text })
+        })
+        .then(res => res.json())
+        .then(comment => this.setState({
+            comments: [...this.state.comments, comment],
+            addCmt: false
+        }))
+    }
+
+    addCmt = () => {
+        return(
+            <div>
+                <div>
+                    <b>Add Comment:</b>
+                    <textarea 
+                        className="input-group input-group-sm"  
+                        type="text" 
+                        name='comment' 
+                        value={this.state.comment} 
+                        onChange={this.handleAddCmt} 
+                    />
+                </div>
+                <div className="buttons">
+                    <Button 
+                        className="btn btn-secondary"
+                        onClick={this.handlePostCmt}
+                    >Comment</Button>
                 </div>
             </div>
         )
     }
     
     render() {
+        // console.log(this.state.comment)
         const {workout, playing, controls, muted, showDes, showCmts} = this.state
         return (
             <div>
@@ -249,11 +311,11 @@ class WorkoutPage extends React.Component {
                             </div>
                             </div>
                         <div className="col-sm-4">
-                                <div className="startWorkout">
-                                    {this.buttons()}
-                                </div>
-                                    {showDes && this.renderDes()}
-                                    {showCmts && this.renderCmts()}
+                            <div className="startWorkout">
+                                {this.buttons()}
+                            </div>
+                            {showDes && this.renderDes()}
+                            {showCmts && this.renderCmts()}
                         </div>
                     </div>
                 </div>
