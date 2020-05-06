@@ -17,7 +17,7 @@ class WorkoutPage extends React.Component {
         user: {},
         comments:[],
         showDes: false,
-        showCmts: true,
+        showCmts: false,
         addCmt: false,
         comment: ""
     }
@@ -102,7 +102,7 @@ class WorkoutPage extends React.Component {
                     variant="btn btn-outline-danger"
                     value={plid.id} 
                     onClick={this.props.handleRemove}
-                > - My Workouts </Button>
+                > - Favorites </Button>
             </div>
         )} else {
             return (
@@ -111,7 +111,7 @@ class WorkoutPage extends React.Component {
                         variant="btn btn-outline-dark"
                         value={this.state.workout.id} 
                         onClick={this.props.handleAdd}
-                    > + My Workouts </Button>
+                    > + Favorites </Button>
                 </div>
             )
         }
@@ -164,7 +164,7 @@ class WorkoutPage extends React.Component {
             <div>
                 <strong>Duration: {this.state.workout.duration} mins</strong><br/>
                 <div className="button">
-                    <Button variant="outline-success" onClick={this.handleStart}>Start Workout</Button>
+                    <Button variant="success" onClick={this.handleStart}>Start Workout</Button>
                 </div>
             </div>
         )
@@ -210,7 +210,7 @@ class WorkoutPage extends React.Component {
                         <em>Created by: {user.name}</em><br/>
                     </div>
                     <div className="description">
-                        <b>Description:</b><br/> 
+                        <b>Details:</b><br/> 
                         {workout.description}
                     </div>
                 </div>
