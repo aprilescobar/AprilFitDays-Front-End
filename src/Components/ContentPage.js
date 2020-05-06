@@ -40,32 +40,29 @@ class ContentPage extends React.Component {
         return(
             <div>
                 <div id="accordion">
-                <div className="card">
-                    <div className="btn btn-outline-dark" id={`heading${workout.id}`}>
-                    <div className="mb-0">
-                        <div className="title" data-toggle="collapse" data-target={`#${workout.id}`} aria-expanded="true" aria-controls="collapseOne">
-                        {workout.name}
+                    <div className="card">
+                        <div className="btn btn-outline-dark" id={`heading${workout.id}`}>
+                        <div className="mb-0">
+                            <div className="title" data-toggle="collapse" data-target={`#${workout.id}`} aria-expanded="true" aria-controls="collapseOne">
+                            {workout.name}
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    <div id={workout.id} className="collapse" aria-labelledby={`heading${workout.id}`} data-parent="#accordion">
-                    <div className="card-body">
-                        <em>Created by: {workout.user.name}</em>
-                    <div className="buttons"> 
-                        <div className="button">
-                            <Link to={`/workouts/${workout.id}`}>
-                                <Button variant="btn btn-outline-dark">Go to Workout</Button>
-                            </Link>
                         </div>
-                        {this.buttons()}
-                    </div>
-                    </div>
+                        <div id={workout.id} className="collapse" aria-labelledby={`heading${workout.id}`} data-parent="#accordion">
+                        <div className="card-body">
+                            <em>Created by: {workout.user.name}</em>
+                        <div className="buttons"> 
+                            <div className="button">
+                                <Link to={`/workouts/${workout.id}`}>
+                                    <Button variant="btn btn-outline-dark">Go to Workout</Button>
+                                </Link>
+                            </div>
+                            {this.props.profile !== true && this.buttons()}
+                        </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-  
-
-                
             </div>
         )
     }

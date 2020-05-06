@@ -1,5 +1,6 @@
 import React from 'react'
 import Moment from 'react-moment';
+import ContentPage from '../Components/ContentPage';
 
 const calendarStrings = {
     lastDay : '[Yesterday at] LT',
@@ -16,12 +17,14 @@ class Home extends React.Component {
         logs: [],
         recent: {},
         workout: {},
-        user: {}
+        user: {},
+        workouts: []
     }
 
     componentDidMount() {
         this.getLogs()
         this.getUser()
+        this.getWorkouts()
     }
 
     getLogs = () => {
@@ -35,6 +38,18 @@ class Home extends React.Component {
         fetch(`http://localhost:3000/users/${id}`)
         .then(res => res.json())
         .then(user => this.setState({user}))
+    }
+
+    getWorkouts = () => {
+        fetch(`http://localhost:3000/workouts`)
+        .then(res => res.json())
+        .then(all => this.setWorkouts(all))
+    }
+
+    setWorkouts = all => {
+        const id = parseInt(this.props.currentUser,0)
+        const workouts = all.filter(workout => workout.user_id === id)
+        this.setState({workouts})
     }
 
     setLogs = list => {
@@ -57,6 +72,16 @@ class Home extends React.Component {
             )
         })
     }
+
+    displayWorkouts = () => {
+        return this.state.workouts.map( workout => {
+            return(
+                <div key={workout.id}>
+                     <ContentPage workout={workout} profile={true}/>
+                </div>
+            )
+        })
+    }
     
     render () {
         const {user, logs} = this.state
@@ -69,8 +94,9 @@ class Home extends React.Component {
                     <div className="row">
                         <div className="col-sm-8">
                             <div className="profile">
-                                <div className="profile-photo">
-                                    <img src={user.img_url} alt="profile"/>
+                                <h3 className="center">My Workouts</h3>
+                                <div className="list">
+                                    {this.displayWorkouts()}
                                 </div>
                             </div>
                         </div>
