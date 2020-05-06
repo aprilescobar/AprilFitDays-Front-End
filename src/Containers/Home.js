@@ -1,6 +1,8 @@
 import React from 'react'
 import Moment from 'react-moment';
 import ContentPage from '../Components/ContentPage';
+import { Link } from 'react-router-dom'
+
 
 const calendarStrings = {
     lastDay : '[Yesterday at] LT',
@@ -82,9 +84,33 @@ class Home extends React.Component {
             )
         })
     }
+
+    creatorView = () => {
+        return (
+            <div>
+                <h3 className="center">My Workouts</h3>
+                <div className="list">
+                    {this.displayWorkouts()}
+                </div>
+            </div>
+        )
+    }
+
+    userView = () => {
+        return (
+            <div>
+                <h3 className="center">Let's get your workout started!</h3>
+                <div className="center">
+                    <br/><img className="quote" src="https://makeyourbodywork.com/wp-content/uploads/2013/12/im-tired-470x482.jpg" alt="inspirational quote"/><br/>
+                    <br/><em className="center">Feel free to contribute to the community and <Link to="/workouts/new" className="link">create</Link> a workout ♡ </em>                
+                </div>
+            </div>
+        )
+    }
     
     render () {
         const {user, logs} = this.state
+        const myWorkoutList = parseInt(this.displayWorkouts().length, 0)
         return (
             <div>
                 <div className="header">
@@ -94,10 +120,7 @@ class Home extends React.Component {
                     <div className="row">
                         <div className="col-sm-8">
                             <div className="profile">
-                                <h3 className="center">My Workouts</h3>
-                                <div className="list">
-                                    {this.displayWorkouts()}
-                                </div>
+                                {myWorkoutList > 0 ? this.creatorView() : this.userView() }
                             </div>
                         </div>
                         <div className="col-sm-4">

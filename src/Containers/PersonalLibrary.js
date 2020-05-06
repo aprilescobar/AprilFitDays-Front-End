@@ -48,7 +48,7 @@ class PersonalLibrary extends React.Component{
                     <button className="dropdown-item" type="button">Frequently Used</button>
                 </div>
                 </div>
-            </div>
+        </div>
         )
     }
 
@@ -66,9 +66,8 @@ class PersonalLibrary extends React.Component{
         }
         return (
             <div className="center"> 
-                <p>Your favorites library is empty. </p>
+                <p>You don't have any favorites. </p>
                 Browse the <Link to="/workouts" className="link">Library</Link> and add some workouts to this page!
-            
             </div>
         )
     }
