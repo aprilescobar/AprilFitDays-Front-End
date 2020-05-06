@@ -63,7 +63,7 @@ class Home extends React.Component {
         return (
             <div>
                 <div className="header">
-                    <h2>Did you workout today {user.name}?</h2>
+                    <h2>{user.name}</h2>
                 </div>
                 <div className="split">
                     <div className="row">

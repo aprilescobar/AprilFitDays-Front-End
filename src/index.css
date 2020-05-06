@@ -217,12 +217,22 @@ textarea {
 } 
  
 .contentCards{
+  padding-top: 15px;
   margin-bottom: 15px;
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 8px;
   max-width: 350px;
 }
+
+.contentCards:hover{
+  background-color: rgba(255, 255, 255, 0.338);
+  transform:scale(1.025);
+  filter:blur(0px);
+  opacity:5;
+  box-shadow:0 8px 20px 0px rgba(0, 4, 11, 0.577);
+}
+
 
 .title{
   font-size: 15px;
@@ -272,7 +282,7 @@ textarea {
   border-radius: 20px;
   width: 100%;
   height: auto;
-  max-height: 200px;
+  max-height: 533px;
   margin-top: 20px;
   padding-left: 1%;
   padding-top: 20px;
@@ -292,9 +302,29 @@ textarea {
   border-radius: 20px;
   width: 100%;
   height: auto;
+  max-height: 533px;
   margin-top: 20px;
   padding: 20px;
   text-align: left;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.cmtSection{
+  display: flex;
+}
+
+.cmt{
+margin: 10px;
+}
+
+.cmtName{
+  margin-right: 3px;
+  width: 55px;
+}
+
+.cmtText{
+  width: 95%;
 }
 
 .playWorkout{

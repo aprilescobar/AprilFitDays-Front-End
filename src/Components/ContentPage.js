@@ -20,7 +20,7 @@ class ContentPage extends React.Component {
                     variant="btn btn-outline-danger"
                     value={props.plid} 
                     onClick={props.handleRemove}
-                > - My Workouts </Button>
+                > - Favorites </Button>
             </div>
         )} else {
             return (
@@ -29,7 +29,7 @@ class ContentPage extends React.Component {
                         variant="btn btn-outline-dark"
                         value={workout.id} 
                         onClick={props.handleAdd}
-                    > + My Workouts </Button>
+                    > + Favorites </Button>
                 </div>
             )
         }

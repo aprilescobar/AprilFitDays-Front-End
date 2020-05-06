@@ -66,7 +66,7 @@ class PersonalLibrary extends React.Component{
         }
         return (
             <div className="center"> 
-                <p>Your personal library is empty. </p>
+                <p>Your favorites library is empty. </p>
                 Browse the <Link to="/workouts" className="link">Library</Link> and add some workouts to this page!
             
             </div>
@@ -78,7 +78,7 @@ class PersonalLibrary extends React.Component{
         return (
             <div>
                 <div className="header">
-                    <h2>My Workouts</h2>
+                    <h2>Favorites</h2>
                 </div>
                 <div className="standard">
                     {this.myWorkouts()}

@@ -12,7 +12,7 @@ const Navbar = props => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-          <Link to="/myworkouts" className="nav-link">My Workouts</Link>
+          <Link to="/myworkouts" className="nav-link">Favorites</Link>
           </li>
           <li className="nav-item">
           <Link to="/workouts" className="nav-link">Library</Link>
@@ -45,7 +45,7 @@ const Navbar = props => {
         </ul>
         <nav className="navbar navbar-dark bg-dark">
           <span className="navbar-text">
-            Hi {props.userName}!
+            Did you workout today {props.userName}?
           </span>
         </nav>
         <Link to="/login" className="btn btn btn-dark my-2 my-sm-0" onClick={props.handleLogout}>Logout</Link>

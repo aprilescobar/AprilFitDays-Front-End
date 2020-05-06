@@ -17,7 +17,7 @@ class WorkoutPage extends React.Component {
         user: {},
         comments:[],
         showDes: false,
-        showCmts: true,
+        showCmts: false,
         addCmt: false,
         comment: ""
     }
@@ -46,21 +46,21 @@ class WorkoutPage extends React.Component {
     }
 
     displayComments = () => {
-        const comments = this.filterComments()
+        const comments = this.filterComments().sort((a, b) => b.id - a.id)
         return comments.map(comment => {
-            if (comment.user.id === this.props.currentUser){
-                return (
-                    <div key={comment.id}>
-                        {comment.text}
-                        {comment.user.name}
-                        <button onClick={this.handleDeleteCmt} value={comment.id}> x </button>
-                    </div>
-                )
-            }
             return(
-                <div key={comment.id}>
-                    {comment.text}
-                    {comment.user.name}
+                <div key={comment.id} className="cmt">
+                    <b className="cmtName">{comment.user.name}</b><br/>
+                    <div className="cmtSection">
+                        <div className="cmtText"> {comment.text}</div>
+                        {comment.user.id === this.props.currentUser && 
+                            <button 
+                                onClick={this.handleDeleteCmt} 
+                                value={comment.id}
+                                className="delCmtBtn"
+                            > x </button>
+                        }
+                    </div>
                 </div>
             )
         })
@@ -102,7 +102,7 @@ class WorkoutPage extends React.Component {
                     variant="btn btn-outline-danger"
                     value={plid.id} 
                     onClick={this.props.handleRemove}
-                > - My Workouts </Button>
+                > - Favorites </Button>
             </div>
         )} else {
             return (
@@ -111,7 +111,7 @@ class WorkoutPage extends React.Component {
                         variant="btn btn-outline-dark"
                         value={this.state.workout.id} 
                         onClick={this.props.handleAdd}
-                    > + My Workouts </Button>
+                    > + Favorites </Button>
                 </div>
             )
         }
@@ -164,7 +164,7 @@ class WorkoutPage extends React.Component {
             <div>
                 <strong>Duration: {this.state.workout.duration} mins</strong><br/>
                 <div className="button">
-                    <Button variant="outline-success" onClick={this.handleStart}>Start Workout</Button>
+                    <Button variant="success" onClick={this.handleStart}>Start Workout</Button>
                 </div>
             </div>
         )
@@ -210,7 +210,7 @@ class WorkoutPage extends React.Component {
                         <em>Created by: {user.name}</em><br/>
                     </div>
                     <div className="description">
-                        <b>Description:</b><br/> 
+                        <b>Details:</b><br/> 
                         {workout.description}
                     </div>
                 </div>
@@ -224,10 +224,7 @@ class WorkoutPage extends React.Component {
             <div>
                 <div className="comments">
                     <div className="center">
-                        <b>Comments:</b>
-                    </div>
-                    <div>
-                        {this.displayComments()}
+                        <h5>Comments:</h5>
                     </div>
                     {addCmt ? this.addCmt() : 
                         <div className="buttons">
@@ -237,6 +234,9 @@ class WorkoutPage extends React.Component {
                             > Add Comment </Button>
                         </div>
                     }
+                    <div>
+                        {this.displayComments()}
+                    </div>
                 </div>
             </div>
         )
@@ -247,22 +247,25 @@ class WorkoutPage extends React.Component {
     }
 
     handlePostCmt = () => {
-        const user_id = this.props.currentUser
-        const workout_id = this.state.workout.id
         const text = this.state.comment
-        fetch(commentsUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({ workout_id, user_id, text })
-        })
-        .then(res => res.json())
-        .then(comment => this.setState({
-            comments: [...this.state.comments, comment],
-            addCmt: false
-        }))
+        if (text !== ''){
+            const user_id = this.props.currentUser
+            const workout_id = this.state.workout.id
+            fetch(commentsUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ workout_id, user_id, text })
+            })
+            .then(res => res.json())
+            .then(comment => this.setState({
+                comments: [...this.state.comments, comment],
+                addCmt: false,
+                comment:''
+            }))
+        }
     }
 
     handleDeleteCmt = e => {
@@ -298,7 +301,6 @@ class WorkoutPage extends React.Component {
     }
     
     render() {
-        // console.log(this.state.comment)
         const {workout, playing, controls, muted, showDes, showCmts} = this.state
         return (
             <div>
