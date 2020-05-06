@@ -14,6 +14,8 @@ class WorkoutPage extends React.Component {
         start: false,
         end: false,
         user: {},
+        showDes: false,
+        showCmts: false,
         comments:[]
     }
 
@@ -57,7 +59,6 @@ class WorkoutPage extends React.Component {
         if (workout.user_id === this.props.currentUser){
             return (
                 <div className="buttons">
-                    {this.anotherSet()}
                     <div className="button">
                         <Link to={`/workouts/${workout.id}/edit`}>
                             <Button 
@@ -77,20 +78,9 @@ class WorkoutPage extends React.Component {
                 </div>
             )
         }
-        return this.anotherSet()
     }
 
-    myWorkoutList = () =>{
-        const myList = this.props.myWorkouts.filter(workouts => workouts.user_id === this.props.currentUser)
-        return myList.map(workout => workout.workout_id)
-    }
-
-    findPlid = () => {
-        const myList = this.props.myWorkouts.filter(workouts => workouts.user_id === this.props.currentUser)
-        return myList.find(workout => workout.workout_id === this.state.workout.id)
-    }
-
-    anotherSet = () => {
+    myWorkoutsBtn = () => {
         const list = this.myWorkoutList()
         const plid = this.findPlid()
         if(list.includes(this.state.workout.id)) {
@@ -114,6 +104,39 @@ class WorkoutPage extends React.Component {
             )
         }
     }
+
+    desBtn = () => {
+        return(
+            <div className="button">
+                <Button 
+                    variant="btn btn-outline-dark"
+                    onClick={() => this.setState({ showDes: !this.state.showDes})}
+                > {this.state.showDes ? "- Details" : "+ Details"} </Button>
+            </div>
+        )
+    }
+
+    cmtsBtn = () => {
+        return(
+            <div className="button">
+                <Button 
+                    variant="btn btn-outline-dark"
+                    onClick={() => this.setState({ showCmts: !this.state.showCmts})}
+                > {this.state.showCmts ? "- Comments" : "+ Comments"} </Button>
+            </div>
+        )
+    }
+
+    myWorkoutList = () =>{
+        const myList = this.props.myWorkouts.filter(workouts => workouts.user_id === this.props.currentUser)
+        return myList.map(workout => workout.workout_id)
+    }
+
+    findPlid = () => {
+        const myList = this.props.myWorkouts.filter(workouts => workouts.user_id === this.props.currentUser)
+        return myList.find(workout => workout.workout_id === this.state.workout.id)
+    }
+
 
     startWorkout = () => {
         if (this.state.start) {
@@ -165,9 +188,38 @@ class WorkoutPage extends React.Component {
         .then(res => res.json())
         .then(res => this.props.history.push('/'))
     }
+
+    renderDes = () =>{
+        const {workout, user} = this.state
+        return(
+            <div>
+                <div className="descriptionBox">
+                    <div className="center">
+                        <img src={user.img_url} alt="Profile Pic" className="thumbnail"/>
+                        <em>Created by: {user.name}</em><br/>
+                    </div>
+                    <div className="description">
+                        <b>Description:</b><br/> 
+                        {workout.description}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    renderCmts = () => {
+        return(
+            <div>
+                <div className="comments">
+                    <b>Comments:</b>
+                    {this.displayComments()}
+                </div>
+            </div>
+        )
+    }
     
     render() {
-        const {workout, playing, controls, muted, user} = this.state
+        const {workout, playing, controls, muted, showDes, showCmts} = this.state
         return (
             <div>
                 <div className="header">
@@ -188,27 +240,20 @@ class WorkoutPage extends React.Component {
                                         height='100%'
                                     />
                                 </div>
-                                {this.creatorAccess()}
+                                <div className="buttons">
+                                    {this.myWorkoutsBtn()}
+                                    {this.desBtn()}
+                                    {this.cmtsBtn()}
+                                </div>
+                                    {this.creatorAccess()}
                             </div>
                             </div>
                         <div className="col-sm-4">
                                 <div className="startWorkout">
                                     {this.buttons()}
                                 </div>
-                                <div className="descriptionBox">
-                                    <div className="center">
-                                        <img src={user.img_url} alt="Profile Pic" className="thumbnail"/>
-                                        <em>Created by: {user.name}</em><br/>
-                                    </div>
-                                    <div className="description">
-                                        <b>Description:</b><br/> 
-                                        {workout.description}
-                                    </div>
-                                </div>
-                                <div className="comments">
-                                   <b>Comments:</b>
-                                    {this.displayComments()}
-                                </div>
+                                    {showDes && this.renderDes()}
+                                    {showCmts && this.renderCmts()}
                         </div>
                     </div>
                 </div>
