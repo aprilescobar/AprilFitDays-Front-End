@@ -48,6 +48,15 @@ class WorkoutPage extends React.Component {
     displayComments = () => {
         const comments = this.filterComments()
         return comments.map(comment => {
+            if (comment.user.id === this.props.currentUser){
+                return (
+                    <div key={comment.id}>
+                        {comment.text}
+                        {comment.user.name}
+                        <button onClick={this.handleDeleteCmt} value={comment.id}> x </button>
+                    </div>
+                )
+            }
             return(
                 <div key={comment.id}>
                     {comment.text}
@@ -256,6 +265,15 @@ class WorkoutPage extends React.Component {
         }))
     }
 
+    handleDeleteCmt = e => {
+        const id = parseInt(e.target.value, 0)
+        fetch(`${commentsUrl}/${id}`, {
+            method: "DELETE"
+        })
+        const updated = this.state.comments.filter(cmt => cmt.id !== id)
+        this.setState({comments: updated})
+    }
+
     addCmt = () => {
         return(
             <div>
@@ -273,7 +291,7 @@ class WorkoutPage extends React.Component {
                     <Button 
                         className="btn btn-secondary"
                         onClick={this.handlePostCmt}
-                    >Comment</Button>
+                    >Post</Button>
                 </div>
             </div>
         )
