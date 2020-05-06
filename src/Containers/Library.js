@@ -29,7 +29,7 @@ class Library extends React.Component{
                 handleStartWorkout={props.handleStartWorkout}
             />
         })
-        return list.slice(startIndex, startIndex + 6)
+        return list.slice(startIndex, startIndex + 18)
     }
 
     handleSubmit = e => {
@@ -57,7 +57,7 @@ class Library extends React.Component{
 
     handlePageButton= e => {
         const num = parseInt(e.target.value, 0)
-        this.setState({startIndex: this.state.startIndex + num })
+        this.setState({startIndex: this.state.startIndex + num }, () => window.scroll(0,0))
     }
 
     pageButtons = () => {
@@ -65,25 +65,25 @@ class Library extends React.Component{
         const myWorkouts = this.myWorkouts().length
         const max = (maxLength - myWorkouts)
         const pageNums = this.pageNums()
-        const page = (this.state.startIndex/6)
+        const page = (this.state.startIndex/18)
         return( 
             <div className="page">
                 {this.state.startIndex > 0 &&
                     <div className="button">
                         <Button 
                             variant="btn btn-outline-dark"
-                            value={-6}
+                            value={-18}
                             onClick={this.handlePageButton}
                         >◀◀︎ Prev </Button >
                     </div>
                 }
                 {pageNums.slice(page, page + 3)   
                 }
-                { this.state.startIndex < (max - 6) &&                 
+                { this.state.startIndex < (max - 18) &&                 
                     <div className="button">
                         <Button 
                             variant="btn btn-outline-dark"
-                            value={6}
+                            value={18}
                             onClick={this.handlePageButton}
                         >Next ▷▷</Button >
                     </div>
@@ -98,7 +98,7 @@ class Library extends React.Component{
         const max = (maxLength - myWorkouts)
 
         if( newIndex >= 0 && newIndex < max){
-            this.setState({ startIndex: newIndex })
+            this.setState({ startIndex: newIndex }, window.scroll(0,0))
         }
     }
 
@@ -107,20 +107,20 @@ class Library extends React.Component{
         const myWorkouts = this.myWorkouts().length
         const max = (maxLength - myWorkouts)
 
-        const lastPage = Math.ceil(max / 6)
+        const lastPage = Math.ceil(max / 18)
         let pagesArray = []
         for(let i = 0; i < lastPage; i++){
             pagesArray.push(<Button 
                 variant="btn btn-outline-dark"
                 className="button"
-                onClick={() => this.setStartIndex(i * 6)} 
+                onClick={() => this.setStartIndex(i * 18)} 
                 key={i}>{i + 1}</Button>)
         }
         return pagesArray
     }
 
     render() {
-        const page = (this.state.startIndex/6) + 1
+        const page = (this.state.startIndex/18) + 1
         console.log("index", page)
         return (
             <div>

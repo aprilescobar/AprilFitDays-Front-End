@@ -16,12 +16,25 @@ class Home extends React.Component {
         logs: [],
         recent: {},
         workout: {},
+        user: {}
     }
 
     componentDidMount() {
+        this.getLogs()
+        this.getUser()
+    }
+
+    getLogs = () => {
         fetch('http://localhost:3000/logs')
         .then(res => res.json())
         .then(list => this.setLogs(list))
+    }
+
+    getUser = () => {
+        const id = parseInt(this.props.currentUser,0)
+        fetch(`http://localhost:3000/users/${id}`)
+        .then(res => res.json())
+        .then(user => this.setState({user}))
     }
 
     setLogs = list => {
@@ -33,11 +46,10 @@ class Home extends React.Component {
 
     pastWorkouts = () => {
         const list = this.state.logs.sort((a, b) => b.id - a.id)
-        console.log(list)
         return list.map(log => {
             const dateToFormat = log.created_at
             return (
-                <div>
+                <div key={log.id}>
                     <b>{log.workout.name}</b>
                     <br/> <Moment calendar={calendarStrings}>{dateToFormat}</Moment>
                     <br /> <br />
@@ -47,24 +59,34 @@ class Home extends React.Component {
     }
     
     render () {
-        // console.log(this.state)
-        const dateToFormat = this.state.recent.created_at
+        const {user, logs} = this.state
         return (
             <div>
                 <div className="header">
-                    <h2>Hi {this.props.userName}!</h2>
+                    <h2>Did you workout today {user.name}?</h2>
                 </div>
-                <div className="standard">
-                    <p>
-                        <br/>Completed Workouts: {this.state.logs.length}
-                        <br/>Recently Completed: {this.state.workout.name}
-                        <br/>On: <Moment calendar={calendarStrings}>{dateToFormat}</Moment>
-                    </p>
-
-                    <h3> <b>Previous Workouts</b>  </h3>
-                    {this.pastWorkouts()}
+                <div className="split">
+                    <div className="row">
+                        <div className="col-sm-8">
+                            <div className="profile">
+                                <div className="profile-photo">
+                                    <img src={user.img_url} alt="profile"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="logSection">
+                                <h4>Previous Workouts</h4>
+                                <div className="center">
+                                   <em> Completed Workouts: <b>{logs.length}</b></em><br/><br/>
+                                </div>
+                                <div className="logs">
+                                    {this.pastWorkouts()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         ) 
     }

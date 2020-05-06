@@ -75,7 +75,6 @@ class ContentPage extends React.Component {
         return (
             <div>
                 <div className="contentCards">
-                    <b>Duration: {workout.duration} min</b><br/>
                     <ReactPlayer 
                         url={workout.media} 
                         playing={false} 
@@ -84,6 +83,7 @@ class ContentPage extends React.Component {
                         width='300px'
                         height='168px'
                     />
+                    <b>Duration: {workout.duration} min</b><br/>
                     {this.details()}
                 </div>
             </div>
