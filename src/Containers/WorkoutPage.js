@@ -13,14 +13,43 @@ class WorkoutPage extends React.Component {
         muted: false,
         start: false,
         end: false,
-        user: {}
+        user: {},
+        comments:[]
     }
 
     componentDidMount() {
         const id = parseInt(this.props.match.params.id, 0)
+        this.getWorkout(id)
+        this.getComments()
+    }
+
+    getWorkout = id =>{
         fetch(`http://localhost:3000/workouts/${id}`)
         .then(res => res.json())
         .then(workout => this.setState({workout, user: workout.user}))
+    }
+
+    getComments = () =>{
+        fetch('http://localhost:3000/comments')
+        .then(res => res.json())
+        .then(comments => this.setState({comments}))
+    }
+
+    filterComments = () => {
+        const id = parseInt(this.props.match.params.id, 0)
+        return this.state.comments.filter(comment => comment.workout_id === id)
+    }
+
+    displayComments = () => {
+        const comments = this.filterComments()
+        return comments.map(comment => {
+            return(
+                <div key={comment.id}>
+                    {comment.text}
+                    {comment.user.name}
+                </div>
+            )
+        })
     }
 
     creatorAccess = () => {
@@ -64,7 +93,6 @@ class WorkoutPage extends React.Component {
     anotherSet = () => {
         const list = this.myWorkoutList()
         const plid = this.findPlid()
-        console.log(plid)
         if(list.includes(this.state.workout.id)) {
             return (
             <div className="button">
@@ -179,6 +207,7 @@ class WorkoutPage extends React.Component {
                                 </div>
                                 <div className="comments">
                                    <b>Comments:</b>
+                                    {this.displayComments()}
                                 </div>
                         </div>
                     </div>
