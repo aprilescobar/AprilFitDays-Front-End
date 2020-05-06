@@ -41,7 +41,7 @@ class App extends React.Component{
   openApp = () => {
     return (
       <div>
-        <div class="fixed-bottom">Footer</div>
+        <div className="fixed-bottom">Footer</div>
           <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
           <ListPpages history={this.props.history} {...this.state}/>
         <Switch>

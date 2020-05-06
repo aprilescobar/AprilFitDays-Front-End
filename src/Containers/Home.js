@@ -1,5 +1,8 @@
 import React from 'react'
 import Moment from 'react-moment';
+import ContentPage from '../Components/ContentPage';
+import { Link } from 'react-router-dom'
+
 
 const calendarStrings = {
     lastDay : '[Yesterday at] LT',
@@ -16,12 +19,14 @@ class Home extends React.Component {
         logs: [],
         recent: {},
         workout: {},
-        user: {}
+        user: {},
+        workouts: []
     }
 
     componentDidMount() {
         this.getLogs()
         this.getUser()
+        this.getWorkouts()
     }
 
     getLogs = () => {
@@ -35,6 +40,18 @@ class Home extends React.Component {
         fetch(`http://localhost:3000/users/${id}`)
         .then(res => res.json())
         .then(user => this.setState({user}))
+    }
+
+    getWorkouts = () => {
+        fetch(`http://localhost:3000/workouts`)
+        .then(res => res.json())
+        .then(all => this.setWorkouts(all))
+    }
+
+    setWorkouts = all => {
+        const id = parseInt(this.props.currentUser,0)
+        const workouts = all.filter(workout => workout.user_id === id)
+        this.setState({workouts})
     }
 
     setLogs = list => {
@@ -57,9 +74,43 @@ class Home extends React.Component {
             )
         })
     }
+
+    displayWorkouts = () => {
+        return this.state.workouts.map( workout => {
+            return(
+                <div key={workout.id}>
+                     <ContentPage workout={workout} profile={true}/>
+                </div>
+            )
+        })
+    }
+
+    creatorView = () => {
+        return (
+            <div>
+                <h3 className="center">My Workouts</h3>
+                <div className="list">
+                    {this.displayWorkouts()}
+                </div>
+            </div>
+        )
+    }
+
+    userView = () => {
+        return (
+            <div>
+                <h3 className="center">Let's get your workout started!</h3>
+                <div className="center">
+                    <br/><img className="quote" src="https://makeyourbodywork.com/wp-content/uploads/2013/12/im-tired-470x482.jpg" alt="inspirational quote"/><br/>
+                    <br/><em className="center">Feel free to contribute to the community and <Link to="/workouts/new" className="link">create</Link> a workout ♡ </em>                
+                </div>
+            </div>
+        )
+    }
     
     render () {
         const {user, logs} = this.state
+        const myWorkoutList = parseInt(this.displayWorkouts().length, 0)
         return (
             <div>
                 <div className="header">
@@ -69,9 +120,7 @@ class Home extends React.Component {
                     <div className="row">
                         <div className="col-sm-8">
                             <div className="profile">
-                                <div className="profile-photo">
-                                    <img src={user.img_url} alt="profile"/>
-                                </div>
+                                {myWorkoutList > 0 ? this.creatorView() : this.userView() }
                             </div>
                         </div>
                         <div className="col-sm-4">

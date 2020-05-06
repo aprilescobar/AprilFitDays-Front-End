@@ -74,7 +74,7 @@ class WorkoutPage extends React.Component {
                     <div className="button">
                         <Link to={`/workouts/${workout.id}/edit`}>
                             <Button 
-                                variant="btn btn-outline-dark"
+                                variant="info"
                                 value={workout.id} 
                                 onClick={this.props.handleEdit}
                             > Edit Workout </Button>
@@ -82,7 +82,7 @@ class WorkoutPage extends React.Component {
                     </div>
                     <div className="button">
                             <Button 
-                            variant="btn btn-outline-dark"
+                            variant="secondary"
                             value={workout.id} 
                             onClick={this.props.handleDelete}
                         > Delete Workout </Button>
