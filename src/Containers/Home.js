@@ -56,9 +56,11 @@ class Home extends React.Component {
 
     setLogs = list => {
         const logs = list.filter( log => log.user_id === this.props.currentUser)
+        if(logs.length > 0 ){
         const recent = logs[0]
         const workout = recent.workout
-        this.setState({ logs, recent, workout})
+        this.setState({ logs, recent, workout})        
+    }
     }
 
     pastWorkouts = () => {
@@ -113,6 +115,7 @@ class Home extends React.Component {
         const myWorkoutList = parseInt(this.displayWorkouts().length, 0)
         return (
             <div>
+                <div id="loader"></div>
                 <div className="header">
                     <h2>{user.name}</h2>
                 </div>
@@ -124,6 +127,9 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div className="col-sm-4">
+                            <div className="profileSection">
+                                <img src={user.img_url} alt="profile" className="profilePhoto"/>
+                            </div>
                             <div className="logSection">
                                 <h4>Previous Workouts</h4>
                                 <div className="center">
@@ -136,6 +142,9 @@ class Home extends React.Component {
                         </div>
                     </div>
                 </div>
+                {/* <div className="footer">
+                         Copyright © 2020 AprilFitDays
+                </div> */}
             </div>
         ) 
     }

@@ -82,6 +82,9 @@ class PersonalLibrary extends React.Component{
                 <div className="standard">
                     {this.myWorkouts()}
                 </div>
+                {/* <div className="footer">
+                         Copyright © 2020 AprilFitDays
+                </div> */}
             </div>
         )
     }

@@ -41,9 +41,8 @@ class App extends React.Component{
   openApp = () => {
     return (
       <div>
-        <div className="fixed-bottom">Footer</div>
-          <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
-          <ListPpages history={this.props.history} {...this.state}/>
+        <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
+        <ListPpages history={this.props.history} {...this.state}/>
         <Switch>
           <Route exact path='/' render={() => <Home {...this.state}/>} />
         </Switch>
