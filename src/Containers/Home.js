@@ -127,9 +127,9 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div className="col-sm-4">
-                            <div className="profileSection">
+                            {/* <div className="profileSection">
                                 <img src={user.img_url} alt="profile" className="profilePhoto"/>
-                            </div>
+                            </div> */}
                             <div className="logSection">
                                 <h4>Previous Workouts</h4>
                                 <div className="center">
