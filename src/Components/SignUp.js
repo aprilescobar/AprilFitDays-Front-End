@@ -27,7 +27,7 @@ class Signup extends React.Component {
     createUser = () => {
         const {name, username, password, img_url} = this.state
 
-        fetch('http://localhost:3000/users', {
+        fetch('https://pacific-harbor-95225.herokuapp.com/users', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -30,20 +30,20 @@ class Home extends React.Component {
     }
 
     getLogs = () => {
-        fetch('http://localhost:3000/logs')
+        fetch('https://pacific-harbor-95225.herokuapp.com/logs')
         .then(res => res.json())
         .then(list => this.setLogs(list))
     }
 
     getUser = () => {
         const id = parseInt(this.props.currentUser,0)
-        fetch(`http://localhost:3000/users/${id}`)
+        fetch(`https://pacific-harbor-95225.herokuapp.com/users/${id}`)
         .then(res => res.json())
         .then(user => this.setState({user}))
     }
 
     getWorkouts = () => {
-        fetch(`http://localhost:3000/workouts`)
+        fetch(`https://pacific-harbor-95225.herokuapp.com/workouts`)
         .then(res => res.json())
         .then(all => this.setWorkouts(all))
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import Button from 'react-bootstrap/Button'
 
-const workoutsUrl = 'http://localhost:3000/workouts'
+const workoutsUrl = 'https://pacific-harbor-95225.herokuapp.com/workouts'
 
 class EditWorkout extends React.Component {
 

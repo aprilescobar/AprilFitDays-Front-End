@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
 
-const commentsUrl = 'http://localhost:3000/comments'
+const commentsUrl = 'https://pacific-harbor-95225.herokuapp.com/comments'
 
 class WorkoutPage extends React.Component {
 
@@ -29,7 +29,7 @@ class WorkoutPage extends React.Component {
     }
 
     getWorkout = id =>{
-        fetch(`http://localhost:3000/workouts/${id}`)
+        fetch(`https://pacific-harbor-95225.herokuapp.com/workouts/${id}`)
         .then(res => res.json())
         .then(workout => this.setState({workout, user: workout.user}))
     }
@@ -188,7 +188,7 @@ class WorkoutPage extends React.Component {
     newLog = () => {
         const user_id = this.props.currentUser
         const workout_id = this.state.workout.id
-        fetch('http://localhost:3000/logs', {
+        fetch('https://pacific-harbor-95225.herokuapp.com/logs', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

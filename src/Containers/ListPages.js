@@ -6,8 +6,8 @@ import NewWorkout from '../Components/NewWorkout'
 import EditWorkout from '../Components/EditWorkout'
 import WorkoutPage from './WorkoutPage'
 
-const workoutsUrl = "http://localhost:3000/workouts"
-const personalLibraryUrl = "http://localhost:3000/personal_libraries"
+const workoutsUrl = "https://pacific-harbor-95225.herokuapp.com/workouts"
+const personalLibraryUrl = "https://pacific-harbor-95225.herokuapp.com/personal_libraries"
 
 class ListPages extends React.Component {
     state ={
@@ -67,7 +67,7 @@ class ListPages extends React.Component {
         this.setState({searchWorkout: '',
         filterWorkout: ''})
 
-        fetch('http://localhost:3000/workouts', {
+        fetch('https://pacific-harbor-95225.herokuapp.com/workouts', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
