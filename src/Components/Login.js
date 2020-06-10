@@ -10,7 +10,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/users')
+        fetch('https://pacific-harbor-95225.herokuapp.com/users')
         .then(res => res.json())
         .then(users => this.setState({users}))
     }
