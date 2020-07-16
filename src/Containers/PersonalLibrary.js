@@ -75,7 +75,7 @@ class PersonalLibrary extends React.Component{
     render() {
         // console.log(this.props)
         return (
-            <div>
+            <div className="section">
                 <div className="header">
                     <h2>Favorites</h2>
                 </div>

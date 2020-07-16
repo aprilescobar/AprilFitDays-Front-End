@@ -127,8 +127,8 @@ class Library extends React.Component{
     }
 
     render() {
-        const page = (this.state.startIndex/24) + 1
-        console.log("index", page)
+        // const page = (this.state.startIndex/24) + 1
+        // console.log("index", page)
         return (
             <div>
                 <div className="splitTop">

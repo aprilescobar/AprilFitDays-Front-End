@@ -114,7 +114,7 @@ class Home extends React.Component {
         const {user, logs} = this.state
         const myWorkoutList = parseInt(this.displayWorkouts().length, 0)
         return (
-            <div>
+            <div className="section">
                 <div id="loader"></div>
                 <div className="header">
                     <h2>{user.name}</h2>

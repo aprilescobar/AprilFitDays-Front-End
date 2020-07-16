@@ -303,7 +303,7 @@ class WorkoutPage extends React.Component {
     render() {
         const {workout, playing, controls, muted, showDes, showCmts} = this.state
         return (
-            <div>
+            <div className="section">
                 <div className="header">
                     <h2>{workout.name}</h2>                    
                 </div>
