@@ -20,6 +20,7 @@ You also have the abilty to become a creator and contribute to the community by 
 
 
 ### Enjoy a Workout:
+Short demo coming soon!
 <!-- <div align="center">
 <img
     src="https://github.com/aprilfaithdays/StyleMe-Front-End/blob/master/src/Visuals/createOutfit.gif"
@@ -28,7 +29,7 @@ You also have the abilty to become a creator and contribute to the community by 
 </div> -->
 
 ## Live Demo: 
-[AprilFitDays Live](https://aprilfitdays.netlify.app/) - Feel free to explore and experience AprilFitDays with this link 
+[AprilFitDays Live](https://aprilfitdays.netlify.app/) - Feel free to explore and experience AprilFitDays with this link. 
 
 ## Video Demo:
 <!-- [AprilFitDays Walkthrough](https://youtu.be/SUtbYjUhQDU) - Here's a quick walkthrough of what you can do with the AprilFitDays site -->
