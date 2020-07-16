@@ -41,11 +41,20 @@ class App extends React.Component{
   openApp = () => {
     return (
       <div>
-        <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
-        <ListPpages history={this.props.history} {...this.state}/>
-        <Switch>
-          <Route exact path='/' render={() => <Home {...this.state}/>} />
-        </Switch>
+        <div className="app-header">
+          <Navbar handleLogout={this.handleLogout} userName={this.state.userName} />
+        </div>
+        <div className="app-body">
+          <ListPpages history={this.props.history} {...this.state}/>
+          <Switch>
+            <Route exact path='/' render={() => <Home {...this.state}/>} />
+          </Switch>
+        </div>
+        <div className="app-footer">
+            2020 AprilFitDays | {' '}
+            <a className="footer-link" href="https://www.linkedin.com/in/april-escobar/" target="_blank" rel="noopener noreferrer">April Escobar</a> |{' '}
+            <a className="footer-link" href="https://github.com/aprilfaithdays" target="_blank" rel="noopener noreferrer">Github</a>
+        </div>
       </div>
     )
   }
@@ -70,10 +79,9 @@ class App extends React.Component{
   }
 
   render () {
-    // console.log("inside App.js", this.state)
     return (
       <div>
-        {(this.state.currentUser !== "") ? this.openApp() : this.accessApp()}
+        {this.state.currentUser !== "" ? this.openApp() : this.accessApp()}
       </div>
     )
   }

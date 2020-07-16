@@ -71,7 +71,7 @@ class Home extends React.Component {
                 <div key={log.id}>
                     <b>{log.workout.name}</b>
                     <br/> <Moment calendar={calendarStrings}>{dateToFormat}</Moment>
-                    <br /> <br />
+                    <br/> <br/>
                 </div>
             )
         })
@@ -127,9 +127,6 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div className="col-sm-4">
-                            {/* <div className="profileSection">
-                                <img src={user.img_url} alt="profile" className="profilePhoto"/>
-                            </div> */}
                             <div className="logSection">
                                 <h4>Previous Workouts</h4>
                                 <div className="center">
@@ -142,9 +139,6 @@ class Home extends React.Component {
                         </div>
                     </div>
                 </div>
-                {/* <div className="footer">
-                         Copyright © 2020 AprilFitDays
-                </div> */}
             </div>
         ) 
     }

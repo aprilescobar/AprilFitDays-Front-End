@@ -153,9 +153,6 @@ class Library extends React.Component{
                                 {this.pageButtons()}
                         </div>
                     </div>
-                    <div className="footer">
-                         Copyright © 2020 AprilFitDays
-                    </div>
             </div>
         )
     }
