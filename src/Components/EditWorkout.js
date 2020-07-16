@@ -54,13 +54,14 @@ class EditWorkout extends React.Component {
         })
         .then(res => res.json())
         .then(this.setState({
-            nameUpdate:'',
-            duration: '',
-            durUpdate:'',
-            desUpdate:''
-        }, 
-        this.props.history.push(`/workouts/${workout.id}`,
-        )), window.location.reload())
+                nameUpdate:'',
+                duration: '',
+                durUpdate:'',
+                desUpdate:''
+            }, 
+            this.props.history.push(`/workouts/${workout.id}`,
+            ))
+        )
     }
     
     render() {
