@@ -31,7 +31,6 @@ class Login extends React.Component {
         } else {
             alert("Can't find username/password combo")
         }
-
     }
 
     render () {
