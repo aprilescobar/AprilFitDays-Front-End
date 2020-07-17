@@ -15,15 +15,6 @@ Unfortunately with the pandemic and social distancing, it's a bit of a challenge
 You also have the abilty to become a creator and contribute to the community by uploading your own follow-along videos!
 
 
-### Enjoy a Workout:
-Short demo coming soon!
-<!-- <div align="center">
-<img
-    src="https://github.com/aprilfaithdays/StyleMe-Front-End/blob/master/src/Visuals/createOutfit.gif"
-    width="100%"
-  />
-</div> -->
-
 ## Live Demo: 
 [AprilFitDays Live](https://aprilfitdays.netlify.app/) - Feel free to explore and experience AprilFitDays with this link. 
 
