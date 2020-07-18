@@ -5,10 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://wallpapertag.com/wallpaper/full/4/a/c/375098-best-leather-background-1920x1080-windows-7.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
+  background: url(https://wallpapertag.com/wallpaper/full/4/a/c/375098-best-leather-background-1920x1080-windows-7.jpg) no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
   color: rgb(3, 27, 46);
 }
 
@@ -418,6 +417,6 @@ margin: 10px;
 }
 
 .quote{
-  height: 300px;
+  height: 45vh;
   width: auto
 }
