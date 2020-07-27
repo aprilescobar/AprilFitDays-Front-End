@@ -52,8 +52,7 @@ class App extends React.Component{
         </div>
         <div className="app-footer">
             2020 AprilFitDays | {' '}
-            <a className="footer-link" href="https://www.linkedin.com/in/april-escobar/" target="_blank" rel="noopener noreferrer">April Escobar</a> |{' '}
-            <a className="footer-link" href="https://github.com/aprilfaithdays" target="_blank" rel="noopener noreferrer">Github</a>
+            <a className="footer-link" href="https://www.aprilescobar.com" target="_blank" rel="noopener noreferrer">April Escobar</a>
         </div>
       </div>
     )
