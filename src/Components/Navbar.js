@@ -17,13 +17,8 @@ const Navbar = props => {
             <li className="nav-item">
             <Link to="/workouts" className="nav-link">Library</Link>
             </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Create
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link to="/workouts/new" className="dropdown-item">Workout</Link>
-              </div>
+            <li className="nav-item">
+            <Link to="/workouts/new" className="nav-link">Create Workout</Link>
             </li>
           </ul>
           <nav className="navbar navbar-dark bg-dark nav-text">
