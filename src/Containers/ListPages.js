@@ -97,7 +97,7 @@ class ListPages extends React.Component {
             method: "DELETE"
         })
         const updated = this.state.workouts.filter(workout => workout.id !== id)
-        this.setState({workouts: updated}, this.props.history.push('/'))
+        this.setState({workouts: updated}, this.props.history.push('/workouts'))
     }
 
     handleSearchWorkout = e => {
